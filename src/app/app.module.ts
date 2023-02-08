@@ -5,6 +5,7 @@ import { AuthComponent } from './layouts/auth/auth.component';
 import { MainComponent } from './layouts/main/main.component';
 import { AppRoutingModule } from './app-routing.module';
 import { RouterModule } from '@angular/router';
+import { MaterialModule } from './material.module';
 
 
 @NgModule({
@@ -17,6 +18,7 @@ import { RouterModule } from '@angular/router';
     BrowserModule,
     AppRoutingModule,
     RouterModule,
+    MaterialModule,
 
   ],
   providers: [],
