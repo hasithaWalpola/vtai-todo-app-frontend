@@ -46,14 +46,12 @@ export class LoginComponent {
           password: this.form.value.password,
         })
         .then((res) => {
-          console.log(res, 'Login Response', this.returnUrl);
+          //console.log(res, 'Login Response', this.returnUrl);
           const userToken: any = { token: res.token };
           this.authService.storeUserToken(userToken);
           this.userService.getLoggedUser().then((res) => {
 
-            console.log(res, 'getLoggedUser Response');
-
-            this.authService.storeUserToken(res.data);
+            this.authService.storeLoggedUser(res.data);
             this.router.navigate([this.returnUrl]);
           })
 
