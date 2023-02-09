@@ -14,7 +14,7 @@ export class TranslationService {
   ) { }
   url = `https://translation.googleapis.com/language/translate/v2?key=`;
 
-  key = 'AIzaSyCur0JF1J-qOEDpt1XllcPFqYhkVlVU9ew';
+  key = '';
 
   public translate(obj: any) {
     return firstValueFrom(this.http.post(this.url + this.key, obj));
