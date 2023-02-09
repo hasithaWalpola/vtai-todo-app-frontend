@@ -8,11 +8,11 @@ export class AuthService {
   }
 
   public getUserToken(): any {
-    return JSON.parse(localStorage.getItem('currentUser') || '{}');
+    return JSON.parse(localStorage.getItem('userToken')!);
   }
 
   storeUserToken(userToken: any) {
-    localStorage.setItem('currentUser', JSON.stringify(userToken));
+    localStorage.setItem('userToken', JSON.stringify(userToken));
   }
 
   storeLoggedUser(userData: any) {
