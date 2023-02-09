@@ -1,1 +1,31 @@
-<p>login works!</p>
+<mat-card class="my-custom-theme">
+    <mat-card-title>Login</mat-card-title>
+    <mat-card-content>
+        <div class="form">
+            <form [formGroup]="form">
+                <p>
+                    <mat-form-field>
+                        <input type="text" matInput placeholder="Email" formControlName="email">
+                    </mat-form-field>
+                </p>
+
+                <p>
+                    <mat-form-field>
+                        <input type="password" matInput placeholder="Password" formControlName="password">
+                    </mat-form-field>
+                </p>
+
+                <p *ngIf="error" class="error">
+                    {{ error }}
+                </p>
+
+            </form>
+        </div>
+
+    </mat-card-content>
+    <mat-card-actions>
+        <button class='button' type="submit" mat-raised-button color="primary" (click)="submit()">Login</button>
+        <p class="secondHeader">Doesn't have an account<span class="boldText" (click)="goToSignupPage()"> Signup</span>
+        </p>
+    </mat-card-actions>
+</mat-card>
