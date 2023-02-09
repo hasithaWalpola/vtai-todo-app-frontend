@@ -5,7 +5,7 @@ import { AddEditTodoModalComponent } from './components/common/add-edit-todo-mod
 import { DeleteTodoModalComponent } from './components/common/delete-todo-modal/delete-todo-modal.component';
 import { TodoComponent } from './components/todo/todo.component';
 import { MainRoutingModule } from './main-routing.module';
-
+import { MaterialModule } from 'src/app/material.module';
 
 
 @NgModule({
@@ -13,11 +13,12 @@ import { MainRoutingModule } from './main-routing.module';
     TodoComponent,
     UserComponent,
     AddEditTodoModalComponent,
-    DeleteTodoModalComponent
+    DeleteTodoModalComponent,
   ],
   imports: [
     CommonModule,
     MainRoutingModule,
+    MaterialModule
   ]
 })
 export class MainModule { }

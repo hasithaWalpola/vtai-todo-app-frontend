@@ -9,12 +9,14 @@ import { MaterialModule } from './material.module';
 import { ApiService } from './services/shared/api.service';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { TopNavComponent } from './layouts/main/components/shared/top-nav/top-nav.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     AuthComponent,
-    MainComponent
+    MainComponent,
+    TopNavComponent
   ],
   imports: [
     BrowserModule,
