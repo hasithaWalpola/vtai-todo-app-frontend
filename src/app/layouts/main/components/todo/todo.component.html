@@ -1,1 +1,15 @@
-<p>todo works!</p>
+<div class="main-container">
+
+    <mat-toolbar-row>
+        <button mat-fab extended color="primary" class="strokeButton" (click)="addTask()">
+            <mat-icon>add</mat-icon>
+            New Task
+        </button>
+    </mat-toolbar-row>
+
+    <div class="listView">
+        <mat-list role="list" *ngFor="let task of todoList">
+            <todo-item [task]='task' (editTask)="editTask(task)" (deleteTask)="deleteTask(task)"></todo-item>
+        </mat-list>
+    </div>
+</div>
