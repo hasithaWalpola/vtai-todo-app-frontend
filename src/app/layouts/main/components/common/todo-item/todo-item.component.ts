@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { DataService } from 'src/app/services/data/data.service';
 
 @Component({
   selector: 'todo-item',
@@ -7,12 +8,19 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 })
 export class TodoItemComponent {
 
-  @Input() task: any;
+  @Input() todo: any;
+  @Input() language: any;
   @Output() editTask = new EventEmitter();
   @Output() deleteTask = new EventEmitter();
+  title: string = ''
+
+  constructor(
+  ) { }
+
 
   ngOnInit(): void {
-    console.log(this.task, 'task');
+    console.log(this.todo, 'task');
+
   }
 
   onEdit() {

@@ -8,8 +8,9 @@
     </mat-toolbar-row>
 
     <div class="listView">
-        <mat-list role="list" *ngFor="let task of todoList">
-            <todo-item [task]='task' (editTask)="editTask(task)" (deleteTask)="deleteTask(task)"></todo-item>
+        <mat-list role="list" *ngFor="let todo of todoList">
+            <todo-item [todo]='todo' [language]="currentLanguage" (editTask)="editTask(todo)"
+                (deleteTask)="deleteTask(todo)"></todo-item>
         </mat-list>
     </div>
 </div>

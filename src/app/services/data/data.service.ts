@@ -6,12 +6,12 @@ import { BehaviorSubject } from 'rxjs';
 })
 export class DataService {
 
-  private defaultLanguage = new BehaviorSubject('English');
+  private defaultLanguage = new BehaviorSubject({ 'lang': 'English', 'value': 'en' },);
   currentLanguage = this.defaultLanguage.asObservable();
 
   constructor() { }
 
-  changeLanguage(language: string) {
+  changeLanguage(language: any) {
     this.defaultLanguage.next(language)
   }
 
