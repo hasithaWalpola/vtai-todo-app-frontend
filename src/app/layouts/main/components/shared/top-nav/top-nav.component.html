@@ -9,13 +9,16 @@
     <span class="example-spacer">
 
     </span>
-    <button mat-flat-button color="white" (click)="translate()"><mat-icon>language</mat-icon>Translate </button>
+    <div appShowHide>
+        <button mat-flat-button color="white" (click)="translate()"><mat-icon>language</mat-icon>Translate </button>
 
-    <mat-form-field appearance="fill">
-        <mat-select (selectionChange)="translate2($event)">
-            <mat-option *ngFor="let language of languages" [value]="language">{{language.lang}}</mat-option>
-        </mat-select>
-    </mat-form-field>
+        <mat-form-field appearance="fill">
+            <mat-select (selectionChange)="translate2($event)">
+                <mat-option *ngFor="let language of languages" [value]="language">{{language.lang}}</mat-option>
+            </mat-select>
+        </mat-form-field>
+    </div>
+
 
     <button mat-icon-button class="example-icon" (click)="logout()">
         <mat-icon>logout</mat-icon>

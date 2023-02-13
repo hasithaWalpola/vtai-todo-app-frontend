@@ -15,13 +15,15 @@ import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { appReducers } from './store/reducers/app.reducers';
 import { TodoEffects } from './store/effects/todo.effects';
+import { ShowHideDirective } from './directives/show-hide.directive';
 
 @NgModule({
   declarations: [
     AppComponent,
     AuthComponent,
     MainComponent,
-    TopNavComponent
+    TopNavComponent,
+    ShowHideDirective
   ],
   imports: [
     BrowserModule,
