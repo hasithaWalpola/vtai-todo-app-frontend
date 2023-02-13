@@ -7,11 +7,11 @@ import { UserHistoryComponent } from './components/user-history/user-history.com
 import { UserComponent } from './components/user/user.component';
 
 const routes: Routes = [
-  { path: 'home', component: TodoComponent, canActivate: [AuthGuard] },
+  { path: 'home', component: TodoComponent, canActivate: [AuthGuard], data: { roles: [2] } },
 
-  { path: 'users', component: UserComponent, canActivate: [AuthGuard] },
+  { path: 'users', component: UserComponent, canActivate: [AuthGuard], data: { roles: [1] } },
 
-  { path: 'user/history', component: UserHistoryComponent, canActivate: [AuthGuard] },
+  { path: 'user/history', component: UserHistoryComponent, canActivate: [AuthGuard], data: { roles: [1] } },
 ];
 
 @NgModule({
