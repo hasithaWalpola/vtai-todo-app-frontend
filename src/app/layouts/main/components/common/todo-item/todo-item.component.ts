@@ -1,10 +1,33 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { DataService } from 'src/app/services/data/data.service';
 
 @Component({
-  selector: 'app-todo-item',
+  selector: 'todo-item',
   templateUrl: './todo-item.component.html',
   styleUrls: ['./todo-item.component.scss']
 })
 export class TodoItemComponent {
 
+  @Input() todo: any;
+  @Input() language: any;
+  @Output() editTask = new EventEmitter();
+  @Output() deleteTask = new EventEmitter();
+  title: string = ''
+
+  constructor(
+  ) { }
+
+
+  ngOnInit(): void {
+    console.log(this.todo, 'task');
+
+  }
+
+  onEdit() {
+    this.editTask.emit()
+  }
+
+  onDelete() {
+    this.deleteTask.emit()
+  }
 }
