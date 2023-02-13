@@ -64,6 +64,10 @@ jobs:
     - name: Use gcloud CLI
       run : gsutil rsync -r gs://vtai-todo ./vtai-todo-app
 
+    - name: Move to Directory
+      run : | 
+          cd vtai-todo-app
+          
     - name: Deploy to App Engine
       id: deploy
       uses: google-github-actions/deploy-appengine@v0.2.0
