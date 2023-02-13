@@ -26,4 +26,6 @@ export class TodoService {
   public getTodosByUser(user_id: any) {
     return firstValueFrom(this.api.get(`todo/user/${user_id}`));
   }
+
+
 }

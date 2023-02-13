@@ -8,6 +8,7 @@ import { MainRoutingModule } from './main-routing.module';
 import { MaterialModule } from 'src/app/material.module';
 import { TodoItemComponent } from './components/common/todo-item/todo-item.component';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { UserHistoryComponent } from './components/user-history/user-history.component';
 
 
 @NgModule({
@@ -17,6 +18,7 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
     TodoItemComponent,
     AddEditTodoModalComponent,
     DeleteTodoModalComponent,
+    UserHistoryComponent,
   ],
   imports: [
     CommonModule,
