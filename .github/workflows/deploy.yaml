@@ -46,7 +46,8 @@ jobs:
         project_id: ${{ secrets.GCP_PROJECT }}
         credentials: ${{ secrets.GCP_CREDENTIALS }}
         path: 'dist'
-        destination: 'vtai-todo'    
+        destination: 'vtai-todo'
+        
     - name: Upload File
       uses: 'google-github-actions/upload-cloud-storage@v1'
       with:
@@ -56,6 +57,13 @@ jobs:
     - name: Load Config Files
       run: |
           echo "${{secrets.VTAI_CONFIG}}" | base64 --decode > .env 
+    
+    - name: Create Directory
+      run : mkdir vtai-todo-app
+            gsutil rsync -r gs://vtai-todo ./vtai-todo-app
+            cd vtai-todo-app
+      
+      
 
     - name: Deploy to App Engine
       id: deploy
