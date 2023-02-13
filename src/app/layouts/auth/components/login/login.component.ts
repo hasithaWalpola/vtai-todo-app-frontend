@@ -52,7 +52,13 @@ export class LoginComponent {
           this.userService.getLoggedUser().then((res) => {
 
             this.authService.storeLoggedUser(res.data);
-            this.router.navigate([this.returnUrl]);
+            //this.router.navigate([this.returnUrl]);
+            if (res.data.role == 1) {
+              this.router.navigate(['/users']);
+            } else {
+              this.router.navigate(['/home']);
+            }
+
           })
 
         })

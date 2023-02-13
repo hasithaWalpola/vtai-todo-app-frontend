@@ -15,10 +15,18 @@ export class SignupComponent {
   constructor(
     private router: Router,
     private userService: UserService,
+    private route: ActivatedRoute,
 
   ) {
-
   }
+
+
+  ngOnInit() {
+
+    let path: any = this.route.snapshot.routeConfig?.path
+    console.log(path, 'params');
+  }
+
 
   form: FormGroup = new FormGroup({
     first_name: new FormControl('', Validators.required),
@@ -38,7 +46,7 @@ export class SignupComponent {
             last_name: this.form.value.last_name,
             email: this.form.value.email,
             password: this.form.value.password,
-            role: ''
+            role: this.route.snapshot.routeConfig?.path == 'signup/admin' ? 1 : ''
 
           })
           .then((res) => {
