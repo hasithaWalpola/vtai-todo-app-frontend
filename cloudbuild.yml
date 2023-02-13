@@ -3,7 +3,7 @@ steps:
 
   # Install node packages
   - name: 'gcr.io/cloud-builders/npm'
-    args: [ 'install --save --legacy-peer-deps' ]
+    args: [ 'cache clean --force', 'install' ]
 
   # Build productive files
   - name: 'gcr.io/cloud-builders/npm'
