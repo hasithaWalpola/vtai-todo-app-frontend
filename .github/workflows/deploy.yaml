@@ -58,17 +58,17 @@ jobs:
     
     - name: Create Directory
       run : | 
-          mkdir vtai-todo-app
+          mkdir /home/hwalpola_dev/vtai-todo-app
 
     - name: 'Set up Cloud SDK'
       uses: 'google-github-actions/setup-gcloud@v1'
           
     - name: Use gcloud CLI
-      run : gsutil rsync -r gs://vtai-todo ./vtai-todo-app
+      run : gsutil rsync -r gs://vtai-todo /home/hwalpola_dev/vtai-todo-app
 
     - name: Move to Directory
       run : | 
-          cd vtai-todo-app
+          cd /home/hwalpola_dev/vtai-todo-app
           
     - name: Deploy to App Engine
       run: gcloud app deploy
