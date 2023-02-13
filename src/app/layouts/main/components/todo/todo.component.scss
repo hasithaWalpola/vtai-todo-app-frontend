@@ -1,0 +1,17 @@
+:host {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.main-container {
+    padding: 20px 0px;
+}
+
+mat-toolbar-row {
+    padding: 0 10%;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    margin-top: 50px;
+}

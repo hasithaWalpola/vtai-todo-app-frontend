@@ -1,1 +1,11 @@
-<p>todo-item works!</p>
+<mat-card>
+    <mat-card-header> {{ todo?.translation[language] }}</mat-card-header>
+    <mat-card-actions class="actions">
+        <button class="button" mat-mini-fab color="primary" (click)="onEdit()">
+            <mat-icon>edit</mat-icon>
+        </button>
+        <button class="button" mat-mini-fab color="primary" (click)="onDelete()">
+            <mat-icon>delete</mat-icon>
+        </button>
+    </mat-card-actions>
+</mat-card>
