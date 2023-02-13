@@ -17,11 +17,6 @@ jobs:
     
     steps:
     
-    - name: Auth
-      uses: 'google-github-actions/auth@v1'
-      with:
-        credentials_json: '${{ secrets.GCP_CREDENTIALS }}'
-        
     - name: Checkout
       uses: actions/checkout@v2
     - uses: actions/setup-node@v1 #this installs node and npm for us
@@ -39,7 +34,12 @@ jobs:
         npm install --save --legacy-peer-deps
         npm install -g @angular/cli
         ng build
-
+        
+    - name: Auth
+      uses: 'google-github-actions/auth@v1'
+      with:
+        credentials_json: '${{ secrets.GCP_CREDENTIALS }}'
+        
     - name: Upload File
       uses: 'google-github-actions/upload-cloud-storage@v1'
       with:
