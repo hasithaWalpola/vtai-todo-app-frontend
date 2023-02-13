@@ -3,11 +3,8 @@ steps:
 
   # Install node packages
   - name: 'gcr.io/cloud-builders/npm'
-    args: [ 'install', 'clean', '--force']
+    args: [ 'install', '--save', '--legacy-peer-deps']
 
-  - name: 'gcr.io/cloud-builders/npm'
-    args: ['install' ]
- 
   # Build productive files
   - name: 'gcr.io/cloud-builders/npm'
     args: [ 'run', 'build', '--prod' ]
