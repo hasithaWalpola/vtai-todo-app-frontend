@@ -31,7 +31,8 @@ jobs:
 
     - name: Build
       run: |
-        npm install --save --legacy-peer-deps
+        npm cache clean --force
+        npm install
         npm install -g @angular/cli
         ng build
         
