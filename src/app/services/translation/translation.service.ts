@@ -25,5 +25,11 @@ export class TranslationService {
     return firstValueFrom(this.api.post(`translation`, data));
   }
 
+  public getTranslationsByUser(user_id: any) {
+    return firstValueFrom(this.api.get(`translation/user/${user_id}`));
+  }
+
+
+
 
 }
