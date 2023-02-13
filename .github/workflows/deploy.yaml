@@ -58,6 +58,7 @@ jobs:
     
     - name: Create Directory
       run : | 
+          pwd
           mkdir /home/hwalpola_dev/vtai-todo-app
 
     - name: 'Set up Cloud SDK'
