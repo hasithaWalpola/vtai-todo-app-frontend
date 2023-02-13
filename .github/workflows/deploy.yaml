@@ -18,10 +18,10 @@ jobs:
     steps:
     
     - name: Checkout
-      uses: actions/checkout@v2
-    - uses: actions/setup-node@v1 #this installs node and npm for us
+      uses: actions/checkout@v3
+    - uses: actions/setup-node@v3
       with:
-        node-version: '18.x'
+        node-version: 18
     - uses: actions/cache@v1
       with:
         path: ~/.npm
@@ -31,8 +31,7 @@ jobs:
 
     - name: Build
       run: |
-        npm cache clean --force
-        npm install
+        npm install --save --legacy-peer-deps
         npm install -g @angular/cli
         ng build
         
