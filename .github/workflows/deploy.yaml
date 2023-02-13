@@ -71,7 +71,6 @@ jobs:
           cd vtai-todo-app
           
     - name: Deploy to App Engine
-      id: deploy
       run: gcloud app deploy
 
     - name: Test
