@@ -32,7 +32,7 @@ jobs:
       run: |
         npm install --save --legacy-peer-deps
         npm install -g @angular/cli
-        ng build --prod
+        ng build
 
     - name: Upload Folder
       uses: 'google-github-actions/upload-cloud-storage@v1'
