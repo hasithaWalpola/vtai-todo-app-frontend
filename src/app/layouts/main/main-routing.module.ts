@@ -11,7 +11,7 @@ const routes: Routes = [
 
   { path: 'users', component: UserComponent, canActivate: [AuthGuard] },
 
-  { path: 'user/history/:id', component: UserHistoryComponent, canActivate: [AuthGuard] },
+  { path: 'user/history', component: UserHistoryComponent, canActivate: [AuthGuard] },
 ];
 
 @NgModule({

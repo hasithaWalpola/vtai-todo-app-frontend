@@ -47,7 +47,10 @@ export class UserComponent {
   onView(user: any) {
     console.log(user, 'user');
     this.dataService.setSelectedUser(user)
-    this.router.navigate(['user/history', user.id]);
+    let data = {
+      user: user.id, name: user.first_name
+    }
+    this.router.navigate(['user/history', data]);
   }
 
 

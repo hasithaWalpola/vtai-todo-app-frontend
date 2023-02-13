@@ -14,21 +14,26 @@ export class UserHistoryComponent {
   selectedUser: any = {}
 
   constructor(
+    private router: ActivatedRoute,
     private dataService: DataService,
     private translationService: TranslationService
   ) { }
 
   ngOnInit() {
 
-    console.log(this.dataService.selectedUser, 'params');
-    this.selectedUser = this.dataService.selectedUser;
-    this.getHistory();
+    let params: any = this.router.snapshot.params
+    console.log(params, 'params');
+    this.selectedUser = params;
+    if (this.selectedUser) {
+      this.getHistory();
+    }
+
 
   }
 
 
   getHistory() {
-    this.translationService.getTranslationsByUser(this.selectedUser.id).then((res) => {
+    this.translationService.getTranslationsByUser(this.selectedUser.user).then((res) => {
 
       console.log(res, 'res');
       this.userHistory = res.data;
