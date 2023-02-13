@@ -46,7 +46,7 @@ export class SignupComponent {
             last_name: this.form.value.last_name,
             email: this.form.value.email,
             password: this.form.value.password,
-            role: this.route.snapshot.routeConfig?.path == 'signup/admin' ? 1 : ''
+            role: this.route.snapshot.routeConfig?.path == 'signup/admin' ? 1 : 2
 
           })
           .then((res) => {
