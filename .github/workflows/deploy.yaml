@@ -57,11 +57,12 @@ jobs:
           echo "${{secrets.VTAI_CONFIG}}" | base64 --decode > .env 
     
     - name: Create Directory
-      run : mkdir vtai-todo-app
-            gsutil rsync -r gs://vtai-todo ./vtai-todo-app
-            cd vtai-todo-app
-      
-      
+      run : | 
+          mkdir vtai-todo-app
+          cd vtai-todo-app
+          
+    - name: Use gcloud CLI
+      run : gsutil rsync -r gs://vtai-todo ./vtai-todo-app
 
     - name: Deploy to App Engine
       id: deploy
