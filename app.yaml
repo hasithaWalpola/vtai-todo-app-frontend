@@ -1,14 +1,20 @@
-runtime: nodejs18
-
-instance_class: F2
-
-env_variables: 
-  BUCKET_NAME: "vtai-todo"
+runtime: python27
+api_version: 1
+threadsafe: yes
 
 handlers:
 - url: /
   static_files: dist/vtai-todo-app-frontend/index.html
   upload: dist/vtai-todo-app-frontend/index.html
-
 - url: /
   static_dir: dist/vtai-todo-app-frontend
+
+skip_files:
+  - e2e/
+  - node_modules/
+  - src/
+  - ^(.*/)?\..*$
+  - ^(.*/)?.*\.json$
+  - ^(.*/)?.*\.md$
+  - ^(.*/)?.*\.yaml$
+  - ^LICENSE
