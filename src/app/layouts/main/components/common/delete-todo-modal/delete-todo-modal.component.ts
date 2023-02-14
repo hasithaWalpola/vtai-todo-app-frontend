@@ -11,6 +11,8 @@ import { AddEditTodoModalComponent } from '../add-edit-todo-modal/add-edit-todo-
 })
 export class DeleteTodoModalComponent {
 
+  error: string = "";
+
   constructor(
     public dialogRef: MatDialogRef<AddEditTodoModalComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
@@ -22,10 +24,9 @@ export class DeleteTodoModalComponent {
 
     this.todoService.delete(this.data.id)
       .then((res) => {
-        console.log(res, 'delete');
         this.dialogRef.close(true);
       }).catch((error) => {
-        console.log(error, 'Error');
+        this.error = error.error
       });
 
   }

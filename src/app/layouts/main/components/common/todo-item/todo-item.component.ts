@@ -18,10 +18,7 @@ export class TodoItemComponent {
   ) { }
 
 
-  ngOnInit(): void {
-    console.log(this.todo, 'task');
-
-  }
+  ngOnInit(): void { }
 
   onEdit() {
     this.editTask.emit()
@@ -30,4 +27,5 @@ export class TodoItemComponent {
   onDelete() {
     this.deleteTask.emit()
   }
+
 }

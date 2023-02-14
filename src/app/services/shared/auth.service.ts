@@ -1,4 +1,6 @@
 import { Injectable } from '@angular/core';
+import { UserToken } from 'src/app/models/token.model';
+import { User } from 'src/app/models/user.model';
 @Injectable({
   providedIn: 'root',
 })
@@ -11,11 +13,11 @@ export class AuthService {
     return JSON.parse(localStorage.getItem('userToken')!);
   }
 
-  storeUserToken(userToken: any) {
+  storeUserToken(userToken: UserToken) {
     localStorage.setItem('userToken', JSON.stringify(userToken));
   }
 
-  storeLoggedUser(userData: any) {
+  storeLoggedUser(userData: User) {
     localStorage.setItem('loggedUser', JSON.stringify(userData));
   }
 
@@ -25,7 +27,7 @@ export class AuthService {
 
   removerUserData() {
     // remove user from local storage when user logout
-    localStorage.removeItem('currentUser');
+    localStorage.removeItem('userToken');
     localStorage.removeItem('loggedUser');
   }
 }

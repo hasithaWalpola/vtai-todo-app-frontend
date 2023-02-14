@@ -1,16 +1,16 @@
 <div class="main-container">
 
     <mat-toolbar-row>
-        <button mat-fab extended color="accent" class="strokeButton" (click)="addTask()">
+        <button mat-fab extended color="accent" class="strokeButton" (click)="addEditTodo(null)">
             <mat-icon>add</mat-icon>
-            New Task
+            New Todo
         </button>
     </mat-toolbar-row>
 
     <div class="listView scrollbar-hidden">
         <mat-list role="list" *ngFor="let todo of todoList">
-            <todo-item [todo]='todo' [language]="currentLanguage" (editTask)="editTask(todo)"
-                (deleteTask)="deleteTask(todo)"></todo-item>
+            <todo-item [todo]='todo' [language]="currentLanguage" (editTask)="addEditTodo(todo)"
+                (deleteTask)="deleteTodo(todo)"></todo-item>
         </mat-list>
     </div>
 </div>

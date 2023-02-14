@@ -9,7 +9,6 @@ import { AuthService } from './auth.service';
 @Injectable()
 export class ApiService {
 
-  public service: any;
   constructor(
     private http: HttpClient,
     private authService: AuthService
@@ -47,16 +46,16 @@ export class ApiService {
         this.authService.removerUserData();
         window.location.href = '/login'
       }
-      return throwError(
+      return (
         error.error.message
       );
     } else {
-      return throwError(
+      return (
         error.error
       );
     }
     //handler.showErrorMessage('Could not connect to remote server.')
-    return throwError(
+    return (
       'Could not connect to remote server.'
     );
   }

@@ -3,8 +3,8 @@
         account_circle
     </mat-icon>
     <div class="userContainer">
-        <p class="headerText">{{loggedUser.first_name + ' '+ loggedUser.last_name}}</p>
-        <!-- <p class="subHeader">Admin</p> -->
+        <p class="headerText">{{loggedUser.first_name + ' '+ loggedUser.last_name}}
+            {{loggedUser.role == 1 ? '(Admin)' : ''}}</p>
     </div>
     <span class="example-spacer">
 
@@ -14,13 +14,12 @@
         </button>
         <mat-menu #menu="matMenu">
             <mat-option *ngFor="let language of languages" [value]="language">
-                <button mat-menu-item (click)="translate2(language)">
+                <button mat-menu-item (click)="translate(language)">
                     <span>{{language.lang}}</span>
                 </button>
             </mat-option>
         </mat-menu>
     </div>
-
 
     <button mat-icon-button class="example-icon" (click)="logout()">
         <mat-icon>logout</mat-icon>

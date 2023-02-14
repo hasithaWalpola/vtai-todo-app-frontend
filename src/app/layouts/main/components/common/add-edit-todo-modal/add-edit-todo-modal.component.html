@@ -15,6 +15,11 @@
         {{ 'Created at :- ' + (data.createdAt | date: 'MMM d, y, h:mm:ss a')}}
     </small>
 
+    <mat-error *ngIf="error">
+        {{ error }}
+    </mat-error>
+
+
 </div>
 <div class="buttonActions" mat-dialog-actions>
     <button mat-stroked-button color="primary" (click)="cancel()">Cancel</button>

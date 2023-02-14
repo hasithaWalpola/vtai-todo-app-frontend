@@ -1,6 +1,9 @@
 import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { select, Store } from '@ngrx/store';
+import { Language } from 'src/app/models/language.model';
+import { Todo } from 'src/app/models/todo.model';
+import { User } from 'src/app/models/user.model';
 import { DataService } from 'src/app/services/data/data.service';
 import { AuthService } from 'src/app/services/shared/auth.service';
 import { TranslationService } from 'src/app/services/translation/translation.service';
@@ -18,8 +21,8 @@ import { DeleteTodoModalComponent } from '../common/delete-todo-modal/delete-tod
 export class TodoComponent {
 
   todos$ = this.store.pipe(select(selectTodoList))
-  public loggedUser: any = {}
-  public todoList: any = []
+  loggedUser!: User
+  todoList: Todo[] = []
   currentLanguage: string = '';
 
   constructor(
@@ -38,65 +41,52 @@ export class TodoComponent {
       this.getTodoList();
     }
 
+    //  subscribe to the todo store change 
     this.store.subscribe((res) => {
-      console.log('store', res);
       if (res.todos.todos) {
         this.todoList = res.todos.todos
       }
     })
 
+    // subscribe to the language change 
     this.data.currentLanguage.subscribe(language => {
       this.currentLanguage = language.value;
+      // call translate function if the language change 
       this.translateTodoList(language)
     })
 
   }
 
+  // load todo list
   getTodoList() {
 
     this.store.dispatch(new GetTodos(this.loggedUser.id));
-    //this.translateTodoList(this.currentLanguage)
 
   }
 
-
-  addTask() {
+  // add/edit todo modal open 
+  addEditTodo(todo: any) {
     const dialogRef = this.dialog.open(AddEditTodoModalComponent, {
-      data: null,
+      data: todo,
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed', result);
+      // refresh todo list if todo added/updated
       if (result) {
         this.getTodoList();
       }
     });
   }
 
-
-  editTask(task: any) {
-
-    const dialogRef = this.dialog.open(AddEditTodoModalComponent, {
-      data: task,
-    });
-
-    dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
-      if (result) {
-        this.getTodoList();
-      }
-    });
-
-  }
-
-  deleteTask(task: any) {
+  // delete todo modal open 
+  deleteTodo(task: any) {
 
     const dialogRef = this.dialog.open(DeleteTodoModalComponent, {
       data: task,
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
+      // refresh todo list if todo deleted
       if (result) {
         this.getTodoList();
       }
@@ -104,18 +94,18 @@ export class TodoComponent {
 
   }
 
-  translateTodoList(language: any) {
+  // delete todo modal open 
+  translateTodoList(language: Language) {
 
-    console.log(language, 'translateTodoList', this.todoList);
-    let todoList: any = []
-    this.todoList.forEach((element: any) => {
+    let todoList: string[] = [] //temp array for store todo items name
+    this.todoList.forEach((element: Todo) => {
+      // check if item already translated for selected langiage 
       if (!element.translation || !element.translation[language.value]) {
         todoList.push(element.title)
       }
     });
 
-    console.log(todoList, 'todoList');
-
+    // check if items available for translations */
     if (todoList.length > 0) {
       let obj = {
         q: todoList,
@@ -125,42 +115,43 @@ export class TodoComponent {
       this.translationService.translate(obj)
         .then((res: any) => {
 
-          let translatedTodoList: any = []
-          this.todoList.forEach((todo: any, index: any) => {
-            let obj: any = { ...todo }
+          let translatedTodoList: Todo[] = []
+          this.todoList.forEach((todo: Todo, index: number) => {
+            let obj: Todo = { ...todo }
 
+            //update transdlation object in todo item
             if ((typeof obj.translation === "object" || typeof obj.translation === 'function') && (obj.translation !== null)) {
               obj.translation = { ...obj.translation }
               obj.translation[language?.value] = res.data.translations[index].translatedText;
             }
-
             translatedTodoList.push(obj);
 
           });
+
+          //call translation action history save function
           this.saveTranslationAction(language)
 
-          console.log(translatedTodoList, 'translationService');
+          //update the todo store
           this.store.dispatch(new UpdateTodosSuccess(translatedTodoList));
 
         }).catch((error) => {
-          console.log(error, 'Error');
+
         });
 
     }
 
-
   }
 
-
-  saveTranslationAction(language: any) {
+  //save translation action history in database
+  saveTranslationAction(language: Language) {
 
     this.translationService.saveAction({
       language: language.lang,
       user_id: this.authService.getLoggedUser().id
     }).then((res) => {
-      console.log(res, 'save action');
+
     }).catch((error) => {
-      console.log(error, 'Error');
+
     });
 
   }

@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { UserToken } from 'src/app/models/token.model';
 import { AuthService } from 'src/app/services/shared/auth.service';
 import { UserService } from 'src/app/services/user/user.service';
 
@@ -16,7 +17,6 @@ export class LoginComponent {
 
   constructor(
     private router: Router,
-    private route: ActivatedRoute,
     private authService: AuthService,
     private userService: UserService,
 
@@ -31,7 +31,7 @@ export class LoginComponent {
 
   submit() {
 
-    //Check if the form is valid
+    //Check if the form is valid one
     if (this.form.valid) {
       this.userService
         .login({
@@ -39,7 +39,7 @@ export class LoginComponent {
           password: this.form.value.password,
         })
         .then((res) => {
-          const userToken: any = { token: res.token };
+          const userToken: UserToken = { token: res.token };
 
           //Store user token in storage
           this.authService.storeUserToken(userToken);
