@@ -16,12 +16,13 @@ steps:
   - name: 'gcr.io/cloud-builders/npm'
     args: [ 'install', '-g', 'typescript' ]
 
-  - name: 'bash'
-    args: [cp,'.env']
 
   # Build productive files
   - name: 'gcr.io/cloud-builders/npm'
     args: [ 'run', 'build', '--prod' ]
+
+  - name: 'bash'
+    args: [cp,'.env']
 
   # Deploy to google cloud app egnine
   - name: 'gcr.io/cloud-builders/gcloud'
