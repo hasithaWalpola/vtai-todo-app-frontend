@@ -11,6 +11,14 @@ steps:
     env:
     - 'API_KEY=${_API_KEY}'
 
+  - name: 'gcr.io/cloud-builders/npm'
+    args: [ 'run', 'create-env' ]
+    env:
+    - 'API_KEY=${_API_KEY}'
+
+  - name: 'bash'
+    args: [cat,'.env']
+
   # Install Dev Dependencies
   - name: 'gcr.io/cloud-builders/npm'
     args: [ 'install', '-g', 'typescript' ]
@@ -19,8 +27,6 @@ steps:
   - name: 'gcr.io/cloud-builders/npm'
     args: [ 'run', 'build', '--prod' ]
 
-  - name: 'bash'
-    args: [cp,'.env','build']
 
   # Deploy to google cloud app egnine
   - name: 'gcr.io/cloud-builders/gcloud'
