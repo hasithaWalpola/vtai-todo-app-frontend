@@ -15,10 +15,12 @@ export class TranslationService {
   ) { }
   url = `https://translation.googleapis.com/language/translate/v2?key=`;
 
-  key = '';
+  key = environment.api_key;
 
   public translate(obj: any) {
-    return firstValueFrom(this.http.post(this.url + this.key, obj));
+    console.log(obj, 'key');
+
+    //return firstValueFrom(this.http.post(this.url + this.key, obj));
   }
 
   public saveAction(data: any) {

@@ -114,8 +114,6 @@ export class TodoComponent {
       }
     });
 
-    this.saveTranslationAction(language)
-
     console.log(todoList, 'todoList');
 
     if (todoList.length > 0) {
@@ -124,28 +122,29 @@ export class TodoComponent {
         target: language.value
       }
 
-      this.translationService.translate(obj)
-        .then((res: any) => {
+      // this.translationService.translate(obj)
+      //   .then((res: any) => {
 
-          let translatedTodoList: any = []
-          this.todoList.forEach((todo: any, index: any) => {
-            let obj: any = { ...todo }
+      //     let translatedTodoList: any = []
+      //     this.todoList.forEach((todo: any, index: any) => {
+      //       let obj: any = { ...todo }
 
-            if ((typeof obj.translation === "object" || typeof obj.translation === 'function') && (obj.translation !== null)) {
-              obj.translation = { ...obj.translation }
-              obj.translation[language?.value] = res.data.translations[index].translatedText;
-            }
+      //       if ((typeof obj.translation === "object" || typeof obj.translation === 'function') && (obj.translation !== null)) {
+      //         obj.translation = { ...obj.translation }
+      //         obj.translation[language?.value] = res.data.translations[index].translatedText;
+      //       }
 
-            translatedTodoList.push(obj);
+      //       translatedTodoList.push(obj);
 
-          });
+      //     });
+      //     this.saveTranslationAction(language)
 
-          console.log(translatedTodoList, 'translationService');
-          this.store.dispatch(new UpdateTodosSuccess(translatedTodoList));
+      //     console.log(translatedTodoList, 'translationService');
+      //     this.store.dispatch(new UpdateTodosSuccess(translatedTodoList));
 
-        }).catch((error) => {
-          console.log(error, 'Error');
-        });
+      //   }).catch((error) => {
+      //     console.log(error, 'Error');
+      //   });
 
     }
 
