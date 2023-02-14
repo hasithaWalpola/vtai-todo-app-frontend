@@ -2,30 +2,48 @@
     <mat-card-title class="title" color="primary">Login</mat-card-title>
     <mat-card-content>
         <div class="form">
-            <form [formGroup]="form">
+            <form [formGroup]="form" (ngSubmit)="submit()">
                 <p>
                     <mat-form-field>
                         <input type="text" matInput placeholder="Email" formControlName="email">
+                        <mat-error
+                            *ngIf="!form.get('email')?.errors?.['required'] && (form.get('email')?.errors?.['pattern'])">
+                            Please enter a valid email address
+                        </mat-error>
+                        <mat-error
+                            *ngIf="form.get('email')?.invalid && (form.get('email')?.dirty || form.get('email')?.touched) && form.get('email')?.errors?.['required']">
+                            Email is required
+                        </mat-error>
                     </mat-form-field>
                 </p>
 
                 <p>
                     <mat-form-field>
                         <input type="password" matInput placeholder="Password" formControlName="password">
+                        <mat-error
+                            *ngIf="form.get('password')?.invalid && (form.get('password')?.dirty || form.get('password')?.touched) && form.get('password')?.errors?.['required']">
+                            Password is required
+                        </mat-error>
                     </mat-form-field>
                 </p>
 
-                <p *ngIf="error" class="error">
+                <mat-error *ngIf="error">
                     {{ error }}
-                </p>
+                </mat-error>
+
+
+                <div class="mt-top">
+                    <button class='button' type="submit" mat-raised-button color="primary"
+                        (click)="submit()">Login</button>
+                </div>
+
 
             </form>
         </div>
 
     </mat-card-content>
     <mat-card-actions>
-        <button class='button' type="submit" mat-raised-button color="primary" (click)="submit()">Login</button>
-        <p class="secondHeader">Doesn't have an account<span class="boldText" (click)="goToSignupPage()"> Signup</span>
+        <p class="secondHeader">Don't have an account?<span class="boldText" (click)="goToSignupPage()"> Signup</span>
         </p>
     </mat-card-actions>
 </mat-card>

@@ -7,42 +7,74 @@
                 <p>
                     <mat-form-field>
                         <input type="text" matInput placeholder="First Name" formControlName="first_name">
+                        <mat-error
+                            *ngIf="form.get('first_name')?.invalid && (form.get('first_name')?.dirty || form.get('first_name')?.touched) && form.get('first_name')?.errors?.['required']">
+                            First Name is required
+                        </mat-error>
                     </mat-form-field>
                 </p>
                 <p>
                     <mat-form-field>
                         <input type="text" matInput placeholder="Last Name" formControlName="last_name">
+                        <mat-error
+                            *ngIf="form.get('last_name')?.invalid && (form.get('last_name')?.dirty || form.get('last_name')?.touched) && form.get('last_name')?.errors?.['required']">
+                            Last Name is required
+                        </mat-error>
                     </mat-form-field>
                 </p>
                 <p>
                     <mat-form-field>
                         <input type="text" matInput placeholder="Email" formControlName="email">
+                        <mat-error
+                            *ngIf="!form.get('email')?.errors?.['required'] && (form.get('email')?.errors?.['pattern'])">
+                            Please enter a valid email address
+                        </mat-error>
+                        <mat-error
+                            *ngIf="form.get('email')?.invalid && (form.get('email')?.dirty || form.get('email')?.touched) && form.get('email')?.errors?.['required']">
+                            Email is required
+                        </mat-error>
                     </mat-form-field>
                 </p>
 
                 <p>
                     <mat-form-field>
                         <input type="password" matInput placeholder="Password" formControlName="password">
+                        <mat-error *ngIf="!form.get('password')?.errors?.['required']">
+                            Password length must be greater than or equal to 8 and password must contain one or more
+                            uppercase, lowercase, numeric and special characters
+                        </mat-error>
+                        <mat-error
+                            *ngIf="form.get('password')?.invalid && (form.get('password')?.dirty || form.get('password')?.touched) && form.get('password')?.errors?.['required']">
+                            Password is required
+                        </mat-error>
                     </mat-form-field>
                 </p>
                 <p>
                     <mat-form-field>
                         <input type="password" matInput placeholder="Confirm Password"
                             formControlName="conirm_password">
+                        <mat-error *ngIf="!passwordMatch">
+                            Password doesn't match
+                        </mat-error>
+                        <mat-error
+                            *ngIf="form.get('conirm_password')?.invalid && (form.get('conirm_password')?.dirty || form.get('conirm_password')?.touched) && form.get('conirm_password')?.errors?.['required']">
+                            Confirm Password is required
+                        </mat-error>
                     </mat-form-field>
                 </p>
 
-                <p *ngIf="error" class="error">
+                <mat-error *ngIf="error">
                     {{ error }}
-                </p>
+                </mat-error>
 
+                <button class='button' type="submit" mat-raised-button color="primary"
+                    (click)="submit()">Signup</button>
             </form>
         </div>
 
     </mat-card-content>
     <mat-card-actions>
-        <button class='button' type="submit" mat-raised-button color="primary" (click)="submit()">Signup</button>
-        <p class="secondHeader">Already have an account<span class="boldText" (click)="goToLoginPage()"> Login</span>
+        <p class="secondHeader">Already have an account?<span class="boldText" (click)="goToLoginPage()"> Login</span>
         </p>
     </mat-card-actions>
 </mat-card>

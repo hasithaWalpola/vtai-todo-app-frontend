@@ -20,25 +20,18 @@ export class LoginComponent {
     private authService: AuthService,
     private userService: UserService,
 
-  ) {
-
-  }
-
-  ngOnInit(): void {
-
-    this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/home';
-
-    console.log(this.returnUrl);
-  }
+  ) { }
 
   form: FormGroup = new FormGroup({
-    email: new FormControl('', Validators.required),
-    password: new FormControl('', Validators.required),
+    email: new FormControl('', [Validators.required, Validators.email, Validators.pattern(
+      '[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+.[a-zA-Z]{2,63}$',
+    ),]),
+    password: new FormControl('', [Validators.required])
   });
 
   submit() {
-    console.log(this.form.value, 'this.form.value');
 
+    //Check if the form is valid
     if (this.form.valid) {
       this.userService
         .login({
@@ -46,13 +39,16 @@ export class LoginComponent {
           password: this.form.value.password,
         })
         .then((res) => {
-          //console.log(res, 'Login Response', this.returnUrl);
           const userToken: any = { token: res.token };
-          this.authService.storeUserToken(userToken);
-          this.userService.getLoggedUser().then((res) => {
 
+          //Store user token in storage
+          this.authService.storeUserToken(userToken);
+
+          //Get logged in user data
+          this.userService.getLoggedUser().then((res) => {
             this.authService.storeLoggedUser(res.data);
-            //this.router.navigate([this.returnUrl]);
+
+            //Check user role and navigate acordingly
             if (res.data.role == 1) {
               this.router.navigate(['/users']);
             } else {
@@ -63,12 +59,9 @@ export class LoginComponent {
 
         })
         .catch((error) => {
-          console.log(error, 'Error');
+          this.error = error.error
         });
 
-
-    } else {
-      console.log("Form not filled");
 
     }
   }
