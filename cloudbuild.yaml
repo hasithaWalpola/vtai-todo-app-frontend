@@ -6,10 +6,9 @@ steps:
     args: [ 'install', '--save', '--legacy-peer-deps']
 
     # Create Environment file
-  - name: 'gcr.io/cloud-builders/npm'
-    args: [ 'run', 'create-env' ]
-    env:
-    - 'API_KEY=${_API_KEY}'
+  - name: Load Config Files
+    run: |
+          echo 'API_KEY=${_API_KEY}' | base64 --decode > .env 
 
   # Install Dev Dependencies
   - name: 'gcr.io/cloud-builders/npm'
