@@ -3,9 +3,6 @@ api_version: 1
 threadsafe: yes
 
 handlers:
-- url: /(.*\.(gif|png|jpg|css|js)(|\.map))$
-  static_files: dist/\1
-  upload: dist/(.*)(|\.map)
 - url: /(.*)
   static_files: dist/vtai-todo-app-frontend/index.html
   upload: dist/vtai-todo-app-frontend/index.html
