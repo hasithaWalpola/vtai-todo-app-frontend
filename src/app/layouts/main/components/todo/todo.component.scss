@@ -5,13 +5,38 @@
 }
 
 .main-container {
-    padding: 20px 0px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: center;
 }
 
 mat-toolbar-row {
-    padding: 0 10%;
+    padding: 0;
     display: flex;
     justify-content: flex-end;
     align-items: center;
-    margin-top: 50px;
+    width: 80vw;
+    margin-bottom: 10px;
+}
+
+.listView {
+    width: 80vw;
+    height: 78vh;
+    overflow: scroll;
+}
+
+.strokeButton {
+    color: white;
+    font-weight: 600;
+}
+
+.scrollbar-hidden::-webkit-scrollbar {
+    display: none;
+}
+
+/* Hide scrollbar for IE, Edge add Firefox */
+.scrollbar-hidden {
+    -ms-overflow-style: none;
+    scrollbar-width: none; /* Firefox */
 }

@@ -1,3 +1,10 @@
-<mat-list role="list" *ngFor="let history of userHistory">
-    <p>{{selectedUser.name}} changed the language to {{history.language}} at {{history.createdAt}} </p>
-</mat-list>
+<button class="button" mat-icon-button color="primary" (click)="backButton()">
+    <mat-icon>keyboard_backspace</mat-icon>
+</button>
+<div class="mainContainer scrollbar-hidden">
+
+    <mat-list role="list" *ngFor="let history of userHistory">
+        <p class="desc">{{selectedUser.name}} changed the language to {{history.language}} </p>
+        <p class="desc">{{history.createdAt}} </p>
+    </mat-list>
+</div>

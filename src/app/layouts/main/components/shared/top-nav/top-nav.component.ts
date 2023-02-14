@@ -43,9 +43,9 @@ export class TopNavComponent {
     this.data.changeLanguage("German")
   }
 
-  translate2(e: any) {
-    console.log(e, 'translate2');
-    this.data.changeLanguage(e.value)
+  translate2(value: any) {
+    console.log(value, 'translate2');
+    this.data.changeLanguage(value)
 
   }
 }

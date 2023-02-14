@@ -1,0 +1,16 @@
+mat-card {
+    background-color: rgba(255, 255, 255, 0.8);
+    border-radius: 10px;
+}
+
+mat-card-actions {
+    display: flex;
+    justify-content: flex-end;
+}
+mat-card-header {
+    color: rgba(1, 1, 1, 0.8);
+    font-weight: 400;
+}
+.button {
+    margin-left: 10px;
+}
