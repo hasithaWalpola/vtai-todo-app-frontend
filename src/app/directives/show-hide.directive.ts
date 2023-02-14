@@ -11,10 +11,7 @@ export class ShowHideDirective {
     private authService: AuthService,
   ) { }
 
-  @Input() role: any;
-
-  loggedUserRole: any;
-  userRole: any;
+  userRole!: number;;
 
   ngAfterViewInit(): void {
 
@@ -24,7 +21,6 @@ export class ShowHideDirective {
 
   showHide() {
     let userRole = this.authService.getLoggedUser().role
-    console.log(userRole, 'userRole');
 
     if (userRole != 1) {
       this.elRef.nativeElement.style.display = 'contents';

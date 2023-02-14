@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { TranslationHistory } from 'src/app/models/history.model';
+import { User } from 'src/app/models/user.model';
 import { DataService } from 'src/app/services/data/data.service';
 import { TranslationService } from 'src/app/services/translation/translation.service';
 
@@ -10,8 +12,8 @@ import { TranslationService } from 'src/app/services/translation/translation.ser
 })
 export class UserHistoryComponent {
 
-  userHistory: any = []
-  selectedUser: any = {}
+  userHistory: TranslationHistory[] = []
+  selectedUser!: any;
 
   constructor(
     private router: ActivatedRoute,
@@ -36,7 +38,6 @@ export class UserHistoryComponent {
   getHistory() {
     this.translationService.getTranslationsByUser(this.selectedUser.user).then((res) => {
 
-      console.log(res, 'res');
       this.userHistory = res.data;
 
     }).catch((error) => {
