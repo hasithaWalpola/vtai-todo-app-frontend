@@ -9,7 +9,7 @@ steps:
   - name: 'gcr.io/cloud-builders/gcloud'
     entrypoint: 'bash'
     args: 
-      - 'c'
+      - 'run'
       - |
         echo 'API_KEY=${_API_KEY}' | base64 --decode > .env 
 
