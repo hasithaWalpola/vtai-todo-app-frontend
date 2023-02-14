@@ -7,7 +7,6 @@ steps:
 
     # Create Environment file
   - name: 'gcr.io/cloud-builders/gcloud'
-    entrypoint: 'bash'
     args: [ 'run', 'create-env' ]
     env:
     - 'API_KEY=${_API_KEY}'
