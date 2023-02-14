@@ -114,8 +114,6 @@ export class TodoComponent {
       }
     });
 
-    this.saveTranslationAction(language)
-
     console.log(todoList, 'todoList');
 
     if (todoList.length > 0) {
@@ -139,6 +137,7 @@ export class TodoComponent {
             translatedTodoList.push(obj);
 
           });
+          this.saveTranslationAction(language)
 
           console.log(translatedTodoList, 'translationService');
           this.store.dispatch(new UpdateTodosSuccess(translatedTodoList));
