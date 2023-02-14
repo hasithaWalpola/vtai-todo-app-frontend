@@ -14,7 +14,7 @@
         </button>
         <mat-menu #menu="matMenu">
             <mat-option *ngFor="let language of languages" [value]="language">
-                <button mat-menu-item (click)="translate2(language.lang)">
+                <button mat-menu-item (click)="translate2(language)">
                     <span>{{language.lang}}</span>
                 </button>
             </mat-option>

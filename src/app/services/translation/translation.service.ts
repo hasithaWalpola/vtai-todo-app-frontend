@@ -18,9 +18,7 @@ export class TranslationService {
   key = environment.api_key;
 
   public translate(obj: any) {
-    console.log(obj, 'key');
-
-    //return firstValueFrom(this.http.post(this.url + this.key, obj));
+    return firstValueFrom(this.http.post(this.url + this.key, obj));
   }
 
   public saveAction(data: any) {
