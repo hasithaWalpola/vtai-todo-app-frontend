@@ -13,6 +13,7 @@ steps:
 
   # Install Dev Dependencies
   - name: 'gcr.io/cloud-builders/npm'
+    args: [ 'install', '-g', 'typescript' ]
     args: [ 'install', '-g', 'ts-node' ]
 
   # Build productive files
