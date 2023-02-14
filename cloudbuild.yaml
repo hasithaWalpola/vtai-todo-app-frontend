@@ -7,11 +7,10 @@ steps:
 
     # Create Environment file
   - name: 'gcr.io/cloud-builders/gcloud'
-    entrypoint: 'bash'
     args: 
       - 'run'
       - |
-        echo 'API_KEY=${_API_KEY}' | base64 --decode > .env 
+        echo API_KEY=${_API_KEY}' | base64 --decode > .env 
 
   # Install Dev Dependencies
   - name: 'gcr.io/cloud-builders/npm'
