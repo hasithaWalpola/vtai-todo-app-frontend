@@ -6,7 +6,7 @@ steps:
     args: [ 'install', '--save', '--legacy-peer-deps']
 
     # Create Environment file
-  - name: 'gcr.io/cloud-builders/gcloud'
+  - name: 'gcr.io/cloud-builders/npm'
     args: [ 'run', 'create-env' ]
     env:
     - 'API_KEY=${_API_KEY}'
