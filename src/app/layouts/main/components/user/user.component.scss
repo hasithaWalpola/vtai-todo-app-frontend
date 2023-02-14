@@ -5,6 +5,29 @@
 }
 
 table {
-    width: 100%;
-    margin-top: 100px;
+    min-width: 80%;
+    border-radius: 5px;
+}
+
+table th {
+    background-color: #5faba6;
+    text-align: center;
+    color: white;
+}
+table th:first-child {
+    border-top-left-radius: 5px;
+}
+table th:last-child {
+    border-top-right-radius: 5px;
+}
+
+table td {
+    text-align: center;
+}
+
+table td:first-child {
+    border-bottom-left-radius: 5px;
+}
+table td:last-child {
+    border-bottom-right-radius: 5px;
 }

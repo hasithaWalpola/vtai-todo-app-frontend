@@ -2,3 +2,35 @@
     justify-content: center;
     align-items: center;
 }
+
+.mainContainer {
+    height: 85vh;
+    overflow: scroll;
+    margin-left: 15%;
+    margin-right: 15%;
+}
+button {
+    margin-left: 15%;
+    margin-right: 15%;
+}
+mat-list {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: solid 1px #7c7c7c;
+}
+
+mat-icon {
+    cursor: pointer;
+}
+
+.scrollbar-hidden::-webkit-scrollbar {
+    display: none;
+}
+
+/* Hide scrollbar for IE, Edge add Firefox */
+.scrollbar-hidden {
+    -ms-overflow-style: none;
+    scrollbar-width: none; /* Firefox */
+}

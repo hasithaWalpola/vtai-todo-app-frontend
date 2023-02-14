@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { DataService } from 'src/app/services/data/data.service';
 import { TranslationService } from 'src/app/services/translation/translation.service';
 
@@ -16,7 +16,8 @@ export class UserHistoryComponent {
   constructor(
     private router: ActivatedRoute,
     private dataService: DataService,
-    private translationService: TranslationService
+    private translationService: TranslationService,
+    private route: Router,
   ) { }
 
   ngOnInit() {
@@ -42,5 +43,9 @@ export class UserHistoryComponent {
       console.log(error, 'Error');
     });
 
+  }
+
+  backButton() {
+    this.route.navigate(["users"])
   }
 }
