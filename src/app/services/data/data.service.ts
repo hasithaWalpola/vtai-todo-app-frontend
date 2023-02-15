@@ -12,7 +12,6 @@ export class DataService {
   currentLanguage = this.defaultLanguage.asObservable();
   selectedUser!: User;
 
-  constructor() { }
 
   changeLanguage(language: Language) {
     this.defaultLanguage.next(language)

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { User } from 'src/app/models/user.model';
 import { DataService } from 'src/app/services/data/data.service';
@@ -10,7 +10,7 @@ import { UserService } from 'src/app/services/user/user.service';
   templateUrl: './user.component.html',
   styleUrls: ['./user.component.scss']
 })
-export class UserComponent {
+export class UserComponent implements OnInit {
 
   loggedUser!: User;
   userList: User[] = []
@@ -44,7 +44,7 @@ export class UserComponent {
 
   onView(user: User) {
     this.dataService.setSelectedUser(user)
-    let data = {
+    const data = {
       id: user.id, name: user.first_name
     }
     this.router.navigate(['user/history', data]);

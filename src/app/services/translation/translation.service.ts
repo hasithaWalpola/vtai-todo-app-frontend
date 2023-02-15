@@ -21,7 +21,7 @@ export class TranslationService {
     return firstValueFrom(this.http.post(this.url + this.key, obj));
   }
 
-  public saveAction(data: any) {
+  public saveAction(data: History) {
     return firstValueFrom(this.api.post(`translation`, data));
   }
 

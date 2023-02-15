@@ -1,7 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TranslationHistory } from 'src/app/models/history.model';
-import { User } from 'src/app/models/user.model';
 import { DataService } from 'src/app/services/data/data.service';
 import { TranslationService } from 'src/app/services/translation/translation.service';
 
@@ -10,7 +9,7 @@ import { TranslationService } from 'src/app/services/translation/translation.ser
   templateUrl: './user-history.component.html',
   styleUrls: ['./user-history.component.scss']
 })
-export class UserHistoryComponent {
+export class UserHistoryComponent implements OnInit {
 
   userHistory: TranslationHistory[] = []
   selectedUser!: any;
@@ -24,7 +23,7 @@ export class UserHistoryComponent {
 
   ngOnInit() {
 
-    let params: any = this.router.snapshot.params
+    const params: any = this.router.snapshot.params
     console.log(params, 'params');
     this.selectedUser = params;
     if (this.selectedUser) {

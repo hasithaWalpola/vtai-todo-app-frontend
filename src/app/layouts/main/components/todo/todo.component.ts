@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { select, Store } from '@ngrx/store';
 import { Language } from 'src/app/models/language.model';
@@ -18,12 +18,12 @@ import { DeleteTodoModalComponent } from '../common/delete-todo-modal/delete-tod
   templateUrl: './todo.component.html',
   styleUrls: ['./todo.component.scss']
 })
-export class TodoComponent {
+export class TodoComponent implements OnInit {
 
   todos$ = this.store.pipe(select(selectTodoList))
   loggedUser!: User
   todoList: Todo[] = []
-  currentLanguage: string = '';
+  currentLanguage = '';
 
   constructor(
     public dialog: MatDialog,
@@ -65,7 +65,7 @@ export class TodoComponent {
   }
 
   // add/edit todo modal open 
-  addEditTodo(todo: any) {
+  addEditTodo(todo: Todo) {
     const dialogRef = this.dialog.open(AddEditTodoModalComponent, {
       data: todo,
     });
@@ -79,7 +79,7 @@ export class TodoComponent {
   }
 
   // delete todo modal open 
-  deleteTodo(task: any) {
+  deleteTodo(task: Todo) {
 
     const dialogRef = this.dialog.open(DeleteTodoModalComponent, {
       data: task,
@@ -97,7 +97,7 @@ export class TodoComponent {
   // delete todo modal open 
   translateTodoList(language: Language) {
 
-    let todoList: string[] = [] //temp array for store todo items name
+    const todoList: string[] = [] //temp array for store todo items name
     this.todoList.forEach((element: Todo) => {
       // check if item already translated for selected langiage 
       if (!element.translation || !element.translation[language.value]) {
@@ -107,7 +107,7 @@ export class TodoComponent {
 
     // check if items available for translations */
     if (todoList.length > 0) {
-      let obj = {
+      const obj = {
         q: todoList,
         target: language.value
       }
@@ -115,9 +115,9 @@ export class TodoComponent {
       this.translationService.translate(obj)
         .then((res: any) => {
 
-          let translatedTodoList: Todo[] = []
+          const translatedTodoList: Todo[] = []
           this.todoList.forEach((todo: Todo, index: number) => {
-            let obj: Todo = { ...todo }
+            const obj: Todo = { ...todo }
 
             //update transdlation object in todo item
             if ((typeof obj.translation === "object" || typeof obj.translation === 'function') && (obj.translation !== null)) {

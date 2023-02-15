@@ -6,9 +6,6 @@ import { User } from 'src/app/models/user.model';
 })
 export class AuthService {
 
-  constructor() {
-  }
-
   public getUserToken(): any {
     return JSON.parse(localStorage.getItem('userToken')!);
   }

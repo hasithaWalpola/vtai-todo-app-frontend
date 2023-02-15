@@ -10,8 +10,8 @@ import { UserService } from 'src/app/services/user/user.service';
 })
 export class SignupComponent {
 
-  error: string = "";
-  passwordMatch: boolean = true;
+  error = "";
+  passwordMatch = true;
 
   constructor(
     private router: Router,

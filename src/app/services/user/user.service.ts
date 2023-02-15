@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { firstValueFrom } from 'rxjs';
+import { User } from 'src/app/models/user.model';
 import { ApiService } from '../shared/api.service';
 
 @Injectable({
@@ -11,11 +12,11 @@ export class UserService {
     private api: ApiService,
   ) { }
 
-  public login(data: any) {
+  public login(data: User) {
     return firstValueFrom(this.api.post(`login`, data));
   }
 
-  public register(data: any) {
+  public register(data: User) {
     return firstValueFrom(this.api.post(`register`, data));
   }
 

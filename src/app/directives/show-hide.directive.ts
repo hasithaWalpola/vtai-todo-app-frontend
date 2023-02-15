@@ -1,17 +1,17 @@
-import { Directive, ElementRef, Input } from '@angular/core';
+import { AfterViewInit, Directive, ElementRef } from '@angular/core';
 import { AuthService } from '../services/shared/auth.service';
 
 @Directive({
   selector: '[appShowHide]'
 })
-export class ShowHideDirective {
+export class ShowHideDirective implements AfterViewInit {
 
   constructor(
     private elRef: ElementRef,
     private authService: AuthService,
   ) { }
 
-  userRole!: number;;
+  userRole!: number;
 
   ngAfterViewInit(): void {
 
@@ -20,7 +20,7 @@ export class ShowHideDirective {
 
 
   showHide() {
-    let userRole = this.authService.getLoggedUser().role
+    const userRole = this.authService.getLoggedUser().role
 
     if (userRole != 1) {
       this.elRef.nativeElement.style.display = 'contents';

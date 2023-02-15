@@ -1,6 +1,6 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { UserToken } from 'src/app/models/token.model';
 import { AuthService } from 'src/app/services/shared/auth.service';
 import { UserService } from 'src/app/services/user/user.service';
@@ -12,8 +12,7 @@ import { UserService } from 'src/app/services/user/user.service';
 })
 export class LoginComponent {
 
-  returnUrl: string = '';
-  error: string = "";
+  error = "";
 
   constructor(
     private router: Router,

@@ -1,7 +1,7 @@
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, throwError } from 'rxjs';
-import { catchError, map } from 'rxjs/operators';
+import { Observable } from 'rxjs';
+import { catchError } from 'rxjs/operators';
 
 import { environment } from 'src/environments/environment';
 import { AuthService } from './auth.service';
@@ -19,7 +19,7 @@ export class ApiService {
 
     //Authenticated header
     if (this.authService.getUserToken()) {
-      var token = this.authService.getUserToken();
+      const token = this.authService.getUserToken();
       return new HttpHeaders({
         'Content-Type': 'application/json',
         'Accept': 'aplication/json',
@@ -40,8 +40,7 @@ export class ApiService {
   //Handle API related erros
   private handleError(error: HttpErrorResponse) {
     console.log(error)
-    if (error.error instanceof ProgressEvent) {
-    } else if (error.error.message) {
+    if (error.error instanceof ProgressEvent) { /* empty */ } else if (error.error.message) {
       if (error.error.message == 'Unauthenticated.') {
         this.authService.removerUserData();
         window.location.href = '/login'

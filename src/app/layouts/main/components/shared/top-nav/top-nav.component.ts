@@ -1,19 +1,18 @@
-import { Component } from '@angular/core';
-import { FormControl } from '@angular/forms';
+import { Component, OnInit } from '@angular/core';
 import { Language } from 'src/app/models/language.model';
 import { User } from 'src/app/models/user.model';
 import { DataService } from 'src/app/services/data/data.service';
 import { AuthService } from 'src/app/services/shared/auth.service';
 
 @Component({
-  selector: 'top-nav',
+  selector: 'app-top-nav',
   templateUrl: './top-nav.component.html',
   styleUrls: ['./top-nav.component.scss']
 })
-export class TopNavComponent {
+export class TopNavComponent implements OnInit {
 
   loggedUser!: User;
-  language: string = '';
+  language = '';
   languages: Language[] = [
     { 'lang': 'English', 'value': 'en' },
     { 'lang': 'German', 'value': 'de' },

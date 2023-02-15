@@ -9,8 +9,8 @@
 
     <div class="listView scrollbar-hidden">
         <mat-list role="list" *ngFor="let todo of todoList">
-            <todo-item [todo]='todo' [language]="currentLanguage" (editTask)="addEditTodo(todo)"
-                (deleteTask)="deleteTodo(todo)"></todo-item>
+            <app-todo-item [todo]='todo' [language]="currentLanguage" (editTask)="addEditTodo(todo)"
+                (deleteTask)="deleteTodo(todo)"></app-todo-item>
         </mat-list>
     </div>
 </div>
