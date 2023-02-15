@@ -39,6 +39,7 @@ export class LoginComponent {
         })
         .subscribe({
           next: (res) => {
+
             const userToken: UserToken = { token: res.token };
 
             //Store user token in storage
@@ -46,18 +47,15 @@ export class LoginComponent {
               this.authService.storeUserToken(userToken);
 
               //Get logged in user data
-              this.userService.getLoggedUser()
-                .subscribe((res) => {
-                  this.authService.storeLoggedUser(res.data);
+              this.authService.getLoggedUser()
 
-                  //Check user role and navigate acordingly
-                  if (res.data.role == 1) {
-                    this.router.navigate(['/users']);
-                  } else {
-                    this.router.navigate(['/home']);
-                  }
+              //Check user role and navigate acordingly
+              if (this.authService.getLoggedUser().role == 1) {
+                this.router.navigate(['/users']);
+              } else {
+                this.router.navigate(['/home']);
+              }
 
-                })
             }
           },
           error: (error) => this.error = error.error

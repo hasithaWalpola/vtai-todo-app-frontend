@@ -18,7 +18,7 @@ export class ApiService {
   get headers() {
 
     //Authenticated header
-    if (this.authService.getUserToken()) {
+    if (this.authService.getUserToken().token) {
       const token = this.authService.getUserToken();
       return new HttpHeaders({
         'Content-Type': 'application/json',
@@ -39,11 +39,11 @@ export class ApiService {
 
   //Handle API related erros
   private handleError(error: HttpErrorResponse) {
-    console.log(error)
+    console.log(error.error.error)
     if (error.error instanceof ProgressEvent) {
       console.log(error)
-    } else if (error.error.message) {
-      if (error.error.message == 'Unauthenticated.') {
+    } else if (error.error.error) {
+      if (error.error.error == 'unauthorized') {
         this.authService.removerUserData();
         window.location.href = '/login'
       }

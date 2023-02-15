@@ -1,21 +1,20 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppComponent } from './app.component';
-import { AuthComponent } from './layouts/auth/auth.component';
-import { MainComponent } from './layouts/main/main.component';
 import { AppRoutingModule } from './app-routing.module';
 import { RouterModule } from '@angular/router';
 import { MaterialModule } from './material.module';
 import { ApiService } from './services/shared/api.service';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { TopNavComponent } from './layouts/main/components/shared/top-nav/top-nav.component';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { appReducers } from './store/reducers/app.reducers';
 import { TodoEffects } from './store/effects/todo.effects';
 import { ShowHideDirective } from './directives/show-hide.directive';
+import { JwtHelperService, JwtModule, JWT_OPTIONS } from '@auth0/angular-jwt';
+import { environment } from 'src/environments/environment';
 
 @NgModule({
   declarations: [
@@ -32,8 +31,9 @@ import { ShowHideDirective } from './directives/show-hide.directive';
     EffectsModule.forRoot([TodoEffects]),
     StoreModule.forRoot(appReducers),
     StoreDevtoolsModule.instrument(),
+    JwtModule
   ],
-  providers: [ApiService],
+  providers: [ApiService, JwtHelperService, { provide: JWT_OPTIONS, useValue: JWT_OPTIONS }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
