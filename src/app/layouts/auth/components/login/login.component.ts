@@ -36,28 +36,32 @@ export class LoginComponent {
         .login({
           email: this.form.value.email,
           password: this.form.value.password,
-        })
-        .then((res) => {
+        }).then((res) => {
+
           const userToken: UserToken = { token: res.token };
 
           //Store user token in storage
-          this.authService.storeUserToken(userToken);
+          if (userToken) {
+            this.authService.storeUserToken(userToken);
 
-          //Get logged in user data
-          this.userService.getLoggedUser().then((res) => {
-            this.authService.storeLoggedUser(res.data);
+            //Get logged in user data
+            this.userService.getLoggedUser().then((res) => {
+              this.authService.storeLoggedUser(res.data);
 
-            //Check user role and navigate acordingly
-            if (res.data.role == 1) {
-              this.router.navigate(['/users']);
-            } else {
-              this.router.navigate(['/home']);
-            }
+              //Check user role and navigate acordingly
+              if (res.data.role == 1) {
+                this.router.navigate(['/users']);
+              } else {
+                this.router.navigate(['/home']);
+              }
 
-          })
+            })
+          }
 
-        })
-        .catch((error) => {
+
+        }).catch((error) => {
+          console.log(error, 'error');
+
           this.error = error.error
         });
 

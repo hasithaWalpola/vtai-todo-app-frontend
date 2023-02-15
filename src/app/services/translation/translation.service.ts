@@ -3,6 +3,7 @@ import { ApiService } from '../shared/api.service';
 import { firstValueFrom } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
+import { TranslationHistory } from 'src/app/models/history.model';
 
 @Injectable({
   providedIn: 'root'
@@ -21,7 +22,7 @@ export class TranslationService {
     return firstValueFrom(this.http.post(this.url + this.key, obj));
   }
 
-  public saveAction(data: History) {
+  public saveAction(data: TranslationHistory) {
     return firstValueFrom(this.api.post(`translation`, data));
   }
 

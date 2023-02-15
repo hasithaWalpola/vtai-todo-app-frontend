@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { select, Store } from '@ngrx/store';
+import { TranslationHistory } from 'src/app/models/history.model';
 import { Language } from 'src/app/models/language.model';
 import { Todo } from 'src/app/models/todo.model';
 import { User } from 'src/app/models/user.model';
@@ -65,7 +66,7 @@ export class TodoComponent implements OnInit {
   }
 
   // add/edit todo modal open 
-  addEditTodo(todo: Todo) {
+  addEditTodo(todo: any) {
     const dialogRef = this.dialog.open(AddEditTodoModalComponent, {
       data: todo,
     });
@@ -145,14 +146,17 @@ export class TodoComponent implements OnInit {
   //save translation action history in database
   saveTranslationAction(language: Language) {
 
-    this.translationService.saveAction({
-      language: language.lang,
-      user_id: this.authService.getLoggedUser().id
-    }).then((res) => {
+    const translationHistory = new TranslationHistory()
 
-    }).catch((error) => {
+    translationHistory.language = language.lang
+    translationHistory.user_id = this.authService.getLoggedUser().id
 
-    });
+    this.translationService.saveAction(translationHistory)
+      .then((res) => {
+
+      }).catch((error) => {
+
+      });
 
   }
 

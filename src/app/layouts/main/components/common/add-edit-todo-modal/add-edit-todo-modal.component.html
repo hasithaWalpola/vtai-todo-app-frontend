@@ -1,4 +1,4 @@
-<h1 mat-dialog-title>{{!data ? 'Add Todo' : 'Edit Todo'}}</h1>
+<h1 mat-dialog-title>{{!todo ? 'Add Todo' : 'Edit Todo'}}</h1>
 <div mat-dialog-content class="content">
     <form [formGroup]="form">
         <mat-label>Task</mat-label>
@@ -11,8 +11,8 @@
         </mat-form-field>
     </form>
 
-    <small *ngIf="data" class="createdAtStyles">
-        {{ 'Created at :- ' + (data.createdAt | date: 'MMM d, y, h:mm:ss a')}}
+    <small *ngIf="todo" class="createdAtStyles">
+        {{ 'Created at :- ' + (todo.createdAt | date: 'MMM d, y, h:mm:ss a')}}
     </small>
 
     <mat-error *ngIf="error">
@@ -23,5 +23,5 @@
 </div>
 <div class="buttonActions" mat-dialog-actions>
     <button mat-stroked-button color="primary" (click)="cancel()">Cancel</button>
-    <button mat-raised-button cdkFocusInitial color="primary" (click)="save(!data ? 'Add' : 'Update')">Save</button>
+    <button mat-raised-button cdkFocusInitial color="primary" (click)="save(!todo ? 'Add' : 'Update')">Save</button>
 </div>

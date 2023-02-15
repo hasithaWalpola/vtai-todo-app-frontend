@@ -5,7 +5,8 @@ export class Todo {
     title!: string;
     description!: string;
     user_id!: number;
-    status?: string;
+    status!: string;
     role!: number;
+    createdAt!: string;
     translation!: Translation;
 }

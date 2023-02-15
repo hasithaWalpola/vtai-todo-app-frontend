@@ -40,7 +40,8 @@ export class ApiService {
   //Handle API related erros
   private handleError(error: HttpErrorResponse) {
     console.log(error)
-    if (error.error instanceof ProgressEvent) { /* empty */ } else if (error.error.message) {
+    if (error.error instanceof ProgressEvent) {
+    } else if (error.error.message) {
       if (error.error.message == 'Unauthenticated.') {
         this.authService.removerUserData();
         window.location.href = '/login'

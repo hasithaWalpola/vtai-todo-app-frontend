@@ -12,11 +12,11 @@ export class UserService {
     private api: ApiService,
   ) { }
 
-  public login(data: User) {
+  public login(data: any) {
     return firstValueFrom(this.api.post(`login`, data));
   }
 
-  public register(data: User) {
+  public register(data: any) {
     return firstValueFrom(this.api.post(`register`, data));
   }
 
