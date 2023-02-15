@@ -1,5 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { RouterTestingModule } from '@angular/router/testing';
+import { MaterialModule } from 'src/app/material.module';
+import { TopNavComponent } from './components/shared/top-nav/top-nav.component';
 import { MainComponent } from './main.component';
 
 describe('MainComponent', () => {
@@ -8,9 +10,13 @@ describe('MainComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ MainComponent ]
+      imports: [
+        RouterTestingModule,
+        MaterialModule
+      ],
+      declarations: [MainComponent, TopNavComponent]
     })
-    .compileComponents();
+      .compileComponents();
 
     fixture = TestBed.createComponent(MainComponent);
     component = fixture.componentInstance;

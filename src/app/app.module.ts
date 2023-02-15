@@ -19,11 +19,7 @@ import { ShowHideDirective } from './directives/show-hide.directive';
 
 @NgModule({
   declarations: [
-    AppComponent,
-    AuthComponent,
-    MainComponent,
-    TopNavComponent,
-    ShowHideDirective
+    ShowHideDirective,
   ],
   imports: [
     BrowserModule,
