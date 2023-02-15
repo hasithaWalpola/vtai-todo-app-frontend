@@ -35,7 +35,7 @@ export class UserHistoryComponent implements OnInit {
 
 
   getHistory() {
-    this.translationService.getTranslationsByUser(this.selectedUser.user)
+    this.translationService.getTranslationsByUser(this.selectedUser.id)
       .subscribe({
         next: (res) => {
           this.userHistory = res.data;

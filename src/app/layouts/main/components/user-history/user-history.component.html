@@ -7,4 +7,8 @@
         <p class="desc">{{selectedUser.name}} changed the language to {{history.language}} </p>
         <p class="desc">{{history.createdAt}} </p>
     </mat-list>
+
+    <p *ngIf="userHistory?.length === 0">
+        No history recorded yet !
+    </p>
 </div>
