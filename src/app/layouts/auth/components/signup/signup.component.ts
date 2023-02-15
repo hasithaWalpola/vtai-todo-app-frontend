@@ -11,10 +11,10 @@ import { UserService } from 'src/app/services/user/user.service';
 export class SignupComponent {
 
   error = "";
-  passwordMatch = true;
+  passwordMatch = false;
 
   constructor(
-    private router: Router,
+    public router: Router,
     private userService: UserService,
     private route: ActivatedRoute,
 
@@ -41,6 +41,7 @@ export class SignupComponent {
 
       //Check if both password and confirm password match
       if (this.form.value.password == this.form.value.conirm_password) {
+        this.passwordMatch = true;
         this.userService
           .register({
             first_name: this.form.value.first_name,

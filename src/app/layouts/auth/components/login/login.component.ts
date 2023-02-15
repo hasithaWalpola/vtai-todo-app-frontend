@@ -15,7 +15,7 @@ export class LoginComponent {
   error = "";
 
   constructor(
-    private router: Router,
+    public router: Router,
     private authService: AuthService,
     private userService: UserService,
 
