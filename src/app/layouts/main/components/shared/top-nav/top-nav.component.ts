@@ -13,10 +13,10 @@ export class TopNavComponent implements OnInit {
 
   loggedUser!: User;
   language = '';
-  languages: Language[] = [
-    { 'lang': 'English', 'value': 'en' },
-    { 'lang': 'German', 'value': 'de' },
-    { 'lang': 'Spanish', 'value': 'es' }
+  languages: any[] = [
+    { lang: 'English', value: 'en' },
+    { lang: 'German', value: 'de' },
+    { lang: 'Spanish', value: 'es' }
   ];
 
   constructor(

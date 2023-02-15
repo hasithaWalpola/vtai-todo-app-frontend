@@ -18,7 +18,7 @@ export class UserHistoryComponent implements OnInit {
     private router: ActivatedRoute,
     private dataService: DataService,
     private translationService: TranslationService,
-    private route: Router,
+    public route: Router,
   ) { }
 
   ngOnInit() {

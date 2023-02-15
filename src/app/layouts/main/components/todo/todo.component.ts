@@ -21,7 +21,7 @@ import { DeleteTodoModalComponent } from '../common/delete-todo-modal/delete-tod
 })
 export class TodoComponent implements OnInit {
 
-  todos$ = this.store.pipe(select(selectTodoList))
+  todos$ = this.store?.pipe(select(selectTodoList))
   loggedUser!: User
   todoList: Todo[] = []
   currentLanguage = '';
@@ -43,7 +43,7 @@ export class TodoComponent implements OnInit {
     }
 
     //  subscribe to the todo store change 
-    this.store.subscribe((res) => {
+    this.store?.subscribe((res) => {
       if (res.todos.todos) {
         this.todoList = res.todos.todos
       }
@@ -61,7 +61,7 @@ export class TodoComponent implements OnInit {
   // load todo list
   getTodoList() {
 
-    this.store.dispatch(new GetTodos(this.loggedUser.id));
+    this.store?.dispatch(new GetTodos(this.loggedUser.id));
 
   }
 
@@ -96,7 +96,7 @@ export class TodoComponent implements OnInit {
   }
 
   // delete todo modal open 
-  translateTodoList(language: Language) {
+  translateTodoList(language: any) {
 
     const todoList: string[] = [] //temp array for store todo items name
     this.todoList.forEach((element: Todo) => {

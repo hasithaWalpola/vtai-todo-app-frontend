@@ -26,7 +26,13 @@ describe('ShowHideDirective', () => {
   });
 
   it('should hide the element if user role is 1', () => {
-    spyOn(authService, 'getLoggedUser').and.returnValue({ role: 1 });
+    spyOn(authService, 'getLoggedUser').and.returnValue({
+      role: 1,
+      id: 0,
+      first_name: '',
+      last_name: '',
+      email: ''
+    });
 
     fixture.detectChanges();
 
@@ -35,7 +41,13 @@ describe('ShowHideDirective', () => {
   });
 
   it('should show the element if user role is not 1', () => {
-    spyOn(authService, 'getLoggedUser').and.returnValue({ role: 2 });
+    spyOn(authService, 'getLoggedUser').and.returnValue({
+      role: 2,
+      id: 0,
+      first_name: '',
+      last_name: '',
+      email: ''
+    });
 
     fixture.detectChanges();
 

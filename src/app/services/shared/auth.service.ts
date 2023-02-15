@@ -5,6 +5,8 @@ import { User } from 'src/app/models/user.model';
   providedIn: 'root',
 })
 export class AuthService {
+  create: any;
+  update: any;
 
   public getUserToken(): UserToken {
     return JSON.parse(localStorage.getItem('userToken')!);
@@ -18,7 +20,7 @@ export class AuthService {
     localStorage.setItem('loggedUser', JSON.stringify(userData));
   }
 
-  public getLoggedUser() {
+  public getLoggedUser(): User {
     return JSON.parse(localStorage.getItem('loggedUser') || '{}');
   }
 

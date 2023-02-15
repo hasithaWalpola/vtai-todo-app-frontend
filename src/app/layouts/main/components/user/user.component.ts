@@ -12,12 +12,11 @@ import { UserService } from 'src/app/services/user/user.service';
 })
 export class UserComponent implements OnInit {
 
-  loggedUser!: User;
   userList: User[] = []
   displayedColumns: string[] = ['first_name', 'last_name', 'email', 'actions'];
 
   constructor(
-    private router: Router,
+    public router: Router,
     private authService: AuthService,
     private userService: UserService,
     private dataService: DataService
@@ -26,11 +25,8 @@ export class UserComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this.loggedUser = this.authService.getLoggedUser()
+    this.getUsers();
 
-    if (this.loggedUser) {
-      this.getUsers();
-    }
   }
 
   getUsers() {

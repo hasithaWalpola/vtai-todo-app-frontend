@@ -7,20 +7,21 @@ import { ApiService } from '../shared/api.service';
   providedIn: 'root'
 })
 export class TodoService {
+  getLoggedUser: any;
 
   constructor(
     private api: ApiService,
   ) { }
 
-  public create(data: Todo): Observable<Todo> {
+  public create(data: Todo): Observable<any> {
     return this.api.post(`todo`, data);
   }
 
-  public update(id: number, data: Todo): Observable<Todo> {
+  public update(id: number, data: Todo): Observable<any> {
     return this.api.put(`todo/${id}`, data);
   }
 
-  public delete(id: number): Observable<Todo> {
+  public delete(id: number): Observable<any> {
     return this.api.delete(`todo/${id}`);
   }
 
