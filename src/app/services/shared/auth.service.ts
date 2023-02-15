@@ -19,7 +19,7 @@ export class AuthService {
   }
 
   public getLoggedUser() {
-    return JSON.parse(localStorage.getItem('loggedUser') || '');
+    return JSON.parse(localStorage.getItem('loggedUser') || '{}');
   }
 
   removerUserData() {

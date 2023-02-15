@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { firstValueFrom } from 'rxjs';
+import { Observable } from 'rxjs';
 import { User } from 'src/app/models/user.model';
 import { ApiService } from '../shared/api.service';
 
@@ -12,19 +12,19 @@ export class UserService {
     private api: ApiService,
   ) { }
 
-  public login(data: any) {
-    return firstValueFrom(this.api.post(`login`, data));
+  public login(data: any): Observable<any> {
+    return this.api.post(`login`, data);
   }
 
-  public register(data: any) {
-    return firstValueFrom(this.api.post(`register`, data));
+  public register(data: any): Observable<any> {
+    return this.api.post(`register`, data);
   }
 
-  public getLoggedUser() {
-    return firstValueFrom(this.api.get(`logged/user`));
+  public getLoggedUser(): Observable<any> {
+    return this.api.get(`logged/user`);
   }
 
-  public getAllUsers() {
-    return firstValueFrom(this.api.get(`users`));
+  public getAllUsers(): Observable<any> {
+    return this.api.get(`users`);
   }
 }

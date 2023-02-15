@@ -34,11 +34,13 @@ export class UserComponent implements OnInit {
   }
 
   getUsers() {
-    this.userService.getAllUsers().then((res) => {
-      this.userList = res.data;
-    }).catch((error) => {
-
-    });
+    this.userService.getAllUsers()
+      .subscribe({
+        next: (res) => {
+          this.userList = res.data;
+        },
+        error: (e) => console.error(e)
+      });
 
   }
 

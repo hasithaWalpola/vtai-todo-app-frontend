@@ -50,12 +50,13 @@ export class SignupComponent {
             role: this.route.snapshot.routeConfig?.path == 'signup/admin' ? 1 : 2
 
           })
-          .then((res) => {
-            this.router.navigate(['/login']);
-          })
-          .catch((error) => {
-            this.error = error.error
+          .subscribe({
+            next: (res) => {
+              this.router.navigate(['/login']);
+            },
+            error: (error) => this.error = error.error
           });
+
       } else {
         this.passwordMatch = false;
       }

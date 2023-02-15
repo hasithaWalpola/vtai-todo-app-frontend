@@ -19,7 +19,8 @@ import { ShowHideDirective } from './directives/show-hide.directive';
 
 @NgModule({
   declarations: [
-    ShowHideDirective,
+    AppComponent,
+    ShowHideDirective
   ],
   imports: [
     BrowserModule,

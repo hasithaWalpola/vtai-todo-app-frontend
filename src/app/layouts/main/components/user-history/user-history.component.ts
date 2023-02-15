@@ -35,13 +35,13 @@ export class UserHistoryComponent implements OnInit {
 
 
   getHistory() {
-    this.translationService.getTranslationsByUser(this.selectedUser.user).then((res) => {
-
-      this.userHistory = res.data;
-
-    }).catch((error) => {
-      console.log(error, 'Error');
-    });
+    this.translationService.getTranslationsByUser(this.selectedUser.user)
+      .subscribe({
+        next: (res) => {
+          this.userHistory = res.data;
+        },
+        error: (e) => console.error(e)
+      });
 
   }
 

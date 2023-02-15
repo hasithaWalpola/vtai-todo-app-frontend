@@ -41,6 +41,7 @@ export class ApiService {
   private handleError(error: HttpErrorResponse) {
     console.log(error)
     if (error.error instanceof ProgressEvent) {
+      console.log(error)
     } else if (error.error.message) {
       if (error.error.message == 'Unauthenticated.') {
         this.authService.removerUserData();
@@ -54,7 +55,6 @@ export class ApiService {
         error.error
       );
     }
-    //handler.showErrorMessage('Could not connect to remote server.')
     return (
       'Could not connect to remote server.'
     );
@@ -73,7 +73,7 @@ export class ApiService {
       .pipe(catchError(err => this.handleError(err)))
   }
 
-  post(path: string, body: Object = {}): Observable<any> {
+  post(path: string, body: object): Observable<any> {
     return this.http
       .post<any>(this.getBaseUrl() + `${path}`, JSON.stringify(body), { headers: this.headers }
       )
@@ -82,7 +82,7 @@ export class ApiService {
       );
   }
 
-  put(path: string, body: Object = {}): Observable<any> {
+  put(path: string, body: object): Observable<any> {
     return this.http
       .put<any>(this.getBaseUrl() + `${path}`, JSON.stringify(body), { headers: this.headers })
       .pipe(
