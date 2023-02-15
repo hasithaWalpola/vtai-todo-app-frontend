@@ -1,6 +1,6 @@
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 
 import { environment } from 'src/environments/environment';
@@ -47,15 +47,15 @@ export class ApiService {
         this.authService.removerUserData();
         window.location.href = '/login'
       }
-      return (
+      return throwError(() =>
         error.error.message
       );
     } else {
-      return (
+      return throwError(() =>
         error.error
       );
     }
-    return (
+    return throwError(() =>
       'Could not connect to remote server.'
     );
   }
