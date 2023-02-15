@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { User } from 'src/app/models/user.model';
 import { DataService } from 'src/app/services/data/data.service';
 import { AuthService } from 'src/app/services/shared/auth.service';
 import { UserService } from 'src/app/services/user/user.service';
@@ -9,10 +10,10 @@ import { UserService } from 'src/app/services/user/user.service';
   templateUrl: './user.component.html',
   styleUrls: ['./user.component.scss']
 })
-export class UserComponent {
+export class UserComponent implements OnInit {
 
-  loggedUser: any = {}
-  userList: any = []
+  loggedUser!: User;
+  userList: User[] = []
   displayedColumns: string[] = ['first_name', 'last_name', 'email', 'actions'];
 
   constructor(
@@ -34,21 +35,17 @@ export class UserComponent {
 
   getUsers() {
     this.userService.getAllUsers().then((res) => {
-
-      console.log(res, 'res');
       this.userList = res.data;
-
     }).catch((error) => {
-      console.log(error, 'Error');
+
     });
 
   }
 
-  onView(user: any) {
-    console.log(user, 'user');
+  onView(user: User) {
     this.dataService.setSelectedUser(user)
-    let data = {
-      user: user.id, name: user.first_name
+    const data = {
+      id: user.id, name: user.first_name
     }
     this.router.navigate(['user/history', data]);
   }

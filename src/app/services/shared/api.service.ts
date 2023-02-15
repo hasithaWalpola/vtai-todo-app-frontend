@@ -1,7 +1,7 @@
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, throwError } from 'rxjs';
-import { catchError, map } from 'rxjs/operators';
+import { Observable } from 'rxjs';
+import { catchError } from 'rxjs/operators';
 
 import { environment } from 'src/environments/environment';
 import { AuthService } from './auth.service';
@@ -9,7 +9,6 @@ import { AuthService } from './auth.service';
 @Injectable()
 export class ApiService {
 
-  public service: any;
   constructor(
     private http: HttpClient,
     private authService: AuthService
@@ -20,7 +19,7 @@ export class ApiService {
 
     //Authenticated header
     if (this.authService.getUserToken()) {
-      var token = this.authService.getUserToken();
+      const token = this.authService.getUserToken();
       return new HttpHeaders({
         'Content-Type': 'application/json',
         'Accept': 'aplication/json',
@@ -47,16 +46,16 @@ export class ApiService {
         this.authService.removerUserData();
         window.location.href = '/login'
       }
-      return throwError(
+      return (
         error.error.message
       );
     } else {
-      return throwError(
+      return (
         error.error
       );
     }
     //handler.showErrorMessage('Could not connect to remote server.')
-    return throwError(
+    return (
       'Could not connect to remote server.'
     );
   }

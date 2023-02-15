@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { firstValueFrom } from 'rxjs';
+import { User } from 'src/app/models/user.model';
 import { ApiService } from '../shared/api.service';
 
 @Injectable({

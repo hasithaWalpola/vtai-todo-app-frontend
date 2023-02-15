@@ -1,6 +1,7 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
+import { UserToken } from 'src/app/models/token.model';
 import { AuthService } from 'src/app/services/shared/auth.service';
 import { UserService } from 'src/app/services/user/user.service';
 
@@ -11,64 +12,59 @@ import { UserService } from 'src/app/services/user/user.service';
 })
 export class LoginComponent {
 
-  returnUrl: string = '';
-  error: string = "";
+  error = "";
 
   constructor(
     private router: Router,
-    private route: ActivatedRoute,
     private authService: AuthService,
     private userService: UserService,
 
-  ) {
-
-  }
-
-  ngOnInit(): void {
-
-    this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/home';
-
-    console.log(this.returnUrl);
-  }
+  ) { }
 
   form: FormGroup = new FormGroup({
-    email: new FormControl('', Validators.required),
-    password: new FormControl('', Validators.required),
+    email: new FormControl('', [Validators.required, Validators.email, Validators.pattern(
+      '[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+.[a-zA-Z]{2,63}$',
+    ),]),
+    password: new FormControl('', [Validators.required])
   });
 
   submit() {
-    console.log(this.form.value, 'this.form.value');
 
+    //Check if the form is valid one
     if (this.form.valid) {
       this.userService
         .login({
           email: this.form.value.email,
           password: this.form.value.password,
-        })
-        .then((res) => {
-          //console.log(res, 'Login Response', this.returnUrl);
-          const userToken: any = { token: res.token };
-          this.authService.storeUserToken(userToken);
-          this.userService.getLoggedUser().then((res) => {
+        }).then((res) => {
 
-            this.authService.storeLoggedUser(res.data);
-            //this.router.navigate([this.returnUrl]);
-            if (res.data.role == 1) {
-              this.router.navigate(['/users']);
-            } else {
-              this.router.navigate(['/home']);
-            }
+          const userToken: UserToken = { token: res.token };
 
-          })
+          //Store user token in storage
+          if (userToken) {
+            this.authService.storeUserToken(userToken);
 
-        })
-        .catch((error) => {
-          console.log(error, 'Error');
+            //Get logged in user data
+            this.userService.getLoggedUser().then((res) => {
+              this.authService.storeLoggedUser(res.data);
+
+              //Check user role and navigate acordingly
+              if (res.data.role == 1) {
+                this.router.navigate(['/users']);
+              } else {
+                this.router.navigate(['/home']);
+              }
+
+            })
+          }
+
+
+        }).catch((error) => {
+          console.log(error, 'error');
+
+          this.error = error.error
         });
 
-
-    } else {
-      console.log("Form not filled");
 
     }
   }

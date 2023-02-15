@@ -10,7 +10,8 @@ import { UserService } from 'src/app/services/user/user.service';
 })
 export class SignupComponent {
 
-  error: string = "";
+  error = "";
+  passwordMatch = true;
 
   constructor(
     private router: Router,
@@ -21,24 +22,24 @@ export class SignupComponent {
   }
 
 
-  ngOnInit() {
-
-    let path: any = this.route.snapshot.routeConfig?.path
-    console.log(path, 'params');
-  }
-
-
   form: FormGroup = new FormGroup({
     first_name: new FormControl('', Validators.required),
     last_name: new FormControl('', Validators.required),
-    email: new FormControl('', Validators.required),
-    password: new FormControl('', Validators.required),
+    email: new FormControl('', [Validators.required, Validators.email, Validators.pattern(
+      '[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+.[a-zA-Z]{2,63}$',
+    ),]),
+    password: new FormControl('', [Validators.required, Validators.pattern(
+      '^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*_=+-]).{8,12}$'
+    )]),
     conirm_password: new FormControl('', Validators.required),
   });
 
   submit() {
+
+    //Check if the form is valid one
     if (this.form.valid) {
 
+      //Check if both password and confirm password match
       if (this.form.value.password == this.form.value.conirm_password) {
         this.userService
           .register({
@@ -50,18 +51,15 @@ export class SignupComponent {
 
           })
           .then((res) => {
-            console.log(res, 'Register Response');
             this.router.navigate(['/login']);
           })
           .catch((error) => {
-            console.log(error, 'Error');
+            this.error = error.error
           });
       } else {
-        console.log("Password doesn't match!");
+        this.passwordMatch = false;
       }
 
-    } else {
-      console.log("Invaild Form => ", this.form);
     }
 
   }

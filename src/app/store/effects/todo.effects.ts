@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { ofType, Actions, createEffect } from '@ngrx/effects';
-import { Store, select } from '@ngrx/store';
+import { Store } from '@ngrx/store';
 import { of } from 'rxjs';
-import { switchMap, map, withLatestFrom } from 'rxjs/operators';
+import { switchMap } from 'rxjs/operators';
 import { AppState } from '../state/app.state';
 import {
     GetTodosSuccess, GetTodos, ETodoActions
