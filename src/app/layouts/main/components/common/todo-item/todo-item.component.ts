@@ -10,7 +10,7 @@ import { Todo } from 'src/app/models/todo.model';
 export class TodoItemComponent {
 
   @Input() todo!: Todo;
-  @Input() language!: Language;
+  @Input() language!: string;
   @Output() editTask = new EventEmitter();
   @Output() deleteTask = new EventEmitter();
   title = ''
