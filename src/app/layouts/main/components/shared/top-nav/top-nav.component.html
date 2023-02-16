@@ -9,7 +9,7 @@
     <span class="example-spacer">
 
     </span>
-    <div appShowHide>
+    <div *ngIf="loggedUser?.role === 2">
         <button mat-flat-button color="white" [matMenuTriggerFor]="menu"><mat-icon>language</mat-icon>Translate
         </button>
         <mat-menu #menu="matMenu">

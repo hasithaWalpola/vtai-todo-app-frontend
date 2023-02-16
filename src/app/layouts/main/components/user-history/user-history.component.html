@@ -2,7 +2,9 @@
     <mat-icon>keyboard_backspace</mat-icon>
 </button>
 <div class="mainContainer scrollbar-hidden">
-
+    <h3 class="button" color="primary">
+        Translation History
+    </h3>
     <mat-list role="list" *ngFor="let history of userHistory">
         <p class="desc">{{selectedUser.name}} changed the language to {{history.language}} </p>
         <p class="desc">{{history.createdAt}} </p>
