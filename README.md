@@ -54,6 +54,7 @@ npm start or ng serve
 ```
 Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
 
+Need to add Google Translate API key to the local environment when run localy
 ### Run the unit tests
 
 To run the unit test suite, execute the following command:
