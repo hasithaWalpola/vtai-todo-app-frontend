@@ -164,7 +164,7 @@ This section provides a summary of my adherence to the requirements listed.
 
 ### ✅ Deployemnt
 
-[Deployement Document]("docs/resources/VTAI%20-%20Todo%20App%20Deployment.pdf")
+[Deployement Document]("https://github.com/hasithaWalpola/vtai-todo-app-frontend/blob/main/docs/resources/VTAI%20-%20Todo%20App%20Deployment.pdf")
 
 - Application deployed to the Google Cloud using Github Cloud Builder
 - Application deployed automatically when push to main branch(CI/CD)
