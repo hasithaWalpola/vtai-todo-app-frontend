@@ -10,10 +10,8 @@ import { of } from 'rxjs';
 import { MaterialModule } from 'src/app/material.module';
 import { TranslationHistory } from 'src/app/models/history.model';
 import { Language } from 'src/app/models/language.model';
-import { ResponseModel } from 'src/app/models/reponse.model';
 import { ApiService } from 'src/app/services/shared/api.service';
 import { TranslationService } from 'src/app/services/translation/translation.service';
-import { GetTodos, UpdateTodosSuccess } from 'src/app/store/actions/todo.actions';
 import { AppState } from 'src/app/store/state/app.state';
 
 import { TodoComponent } from './todo.component';
@@ -74,11 +72,6 @@ describe('TodoComponent', () => {
 
   it('should translate the todo list for the selected language', () => {
     const language = { lang: 'English', value: 'es' };
-    const todoList = [
-      { title: 'Todo 1' },
-      { title: 'Todo 2', translation: { en: 'Todo 2' } },
-      { title: 'Todo 3', translation: { es: 'Tarea 3' } }
-    ];
 
     const translationResult = {
       data: {
@@ -105,11 +98,6 @@ describe('TodoComponent', () => {
 
   it('should not translate anything if all items are already translated for the selected language', () => {
     const language = { lang: 'English', value: 'es' };
-    const todoList = [
-      { title: 'Todo 1', translation: { en: 'Todo 1' } },
-      { title: 'Todo 2', translation: { en: 'Todo 2' } },
-      { title: 'Todo 3', translation: { en: 'Todo 3' } }
-    ];
 
     // component.todoList = todoList;
     component.translateTodoList(language);
