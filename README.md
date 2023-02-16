@@ -2,6 +2,10 @@
 
 [Deployed Application](https://vtai-todo.uc.r.appspot.com)
 
+To register as a user - https://vtai-todo.uc.r.appspot.com/signup
+
+To register as an admin - https://vtai-todo.uc.r.appspot.com/signup/admin
+
 This README outlines the steps to setup the project, provides a brief description of the application and its design, highlights the important design and implementation decisions taken.
 
 ## Content
@@ -164,7 +168,7 @@ This section provides a summary of my adherence to the requirements listed.
 
 ### ✅ Deployemnt
 
-[Deployement Document](https://github.com/hasithaWalpola/vtai-todo-app-frontend/blob/main/docs/resources/VTAI_Todo_App.pdf)
+[Deployement Document](/docs/resources/VTAI_Todo_App.pdf)
 
 - Application deployed to the Google Cloud using Github Cloud Builder
 - Application deployed automatically when push to main branch(CI/CD)
