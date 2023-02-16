@@ -1,5 +1,4 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { Language } from 'src/app/models/language.model';
 import { Todo } from 'src/app/models/todo.model';
 
 @Component({
