@@ -25,6 +25,7 @@ export class TodoComponent implements OnInit {
   loggedUser!: User
   todoList: Todo[] = []
   currentLanguage = '';
+  todo = new Todo();
 
   constructor(
     public dialog: MatDialog,
