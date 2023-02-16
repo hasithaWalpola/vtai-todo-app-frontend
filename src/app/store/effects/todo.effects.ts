@@ -8,6 +8,7 @@ import {
     GetTodosSuccess, GetTodos, ETodoActions
 } from '../actions/todo.actions';
 import { TodoService } from '../../services/todo/todo.service';
+import { ResponseModel } from 'src/app/models/reponse.model';
 
 
 @Injectable()
@@ -24,7 +25,7 @@ export class TodoEffects {
             ofType<GetTodos>(ETodoActions.GET_TODOS),
             switchMap((action) =>
                 this.todoService.getTodosByUser(action.user_id)),
-            switchMap((data: any) => of(new GetTodosSuccess(data.data)))
+            switchMap((data: ResponseModel) => of(new GetTodosSuccess(data.data)))
         )
     );
 

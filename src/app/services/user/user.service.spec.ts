@@ -1,9 +1,10 @@
-import { TestBed, inject } from '@angular/core/testing';
+import { TestBed } from '@angular/core/testing';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import { UserService } from './user.service';
 import { ApiService } from '../shared/api.service';
 import { environment } from 'src/environments/environment';
 import { JwtHelperService, JWT_OPTIONS } from '@auth0/angular-jwt';
+import { User } from 'src/app/models/user.model';
 
 describe('UserService', () => {
   let userService: UserService;
@@ -42,10 +43,15 @@ describe('UserService', () => {
   });
 
   it('should create a user', () => {
-    const data = { name: 'Test User', email: 'test@example.com', password: 'testpassword' };
+    const user = new User();
+    user.first_name = 'first_name',
+      user.last_name = 'last_name',
+      user.email = 'email',
+      user.password = 'pass',
+      user.role = 1
     const expectedUser = { id: 1, name: 'Test User', email: 'test@example.com' };
 
-    userService.register(data).subscribe((user: any) => {
+    userService.register(user).subscribe((user: any) => {
       expect(user).toEqual(expectedUser);
     });
 

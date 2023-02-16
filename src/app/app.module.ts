@@ -14,7 +14,6 @@ import { appReducers } from './store/reducers/app.reducers';
 import { TodoEffects } from './store/effects/todo.effects';
 import { ShowHideDirective } from './directives/show-hide.directive';
 import { JwtHelperService, JwtModule, JWT_OPTIONS } from '@auth0/angular-jwt';
-import { environment } from 'src/environments/environment';
 
 @NgModule({
   declarations: [

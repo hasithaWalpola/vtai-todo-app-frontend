@@ -7,6 +7,7 @@ import { of } from 'rxjs';
 import { MaterialModule } from 'src/app/material.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ResponseModel } from 'src/app/models/reponse.model';
+import { User } from 'src/app/models/user.model';
 
 describe('SignupComponent', () => {
   let component: SignupComponent;
@@ -59,13 +60,13 @@ describe('SignupComponent', () => {
       conirm_password: 'P@ssword123'
     });
     component.submit();
-    expect(userService.register).toHaveBeenCalledWith({
-      first_name: 'John',
-      last_name: 'Doe',
-      email: 'johndoe@example.com',
-      password: 'P@ssword123',
-      role: 2
-    });
+    const user = new User();
+    user.first_name = component.form.value.first_name,
+      user.last_name = component.form.value.last_name,
+      user.email = component.form.value.email,
+      user.password = component.form.value.password,
+      user.role = 2
+    expect(userService.register).toHaveBeenCalledWith(user);
     expect(component.error).toBe('');
   });
 

@@ -4,7 +4,6 @@ import { AuthService } from 'src/app/services/shared/auth.service';
 import { DataService } from 'src/app/services/data/data.service';
 import { User } from 'src/app/models/user.model';
 import { Language } from 'src/app/models/language.model';
-import { of } from 'rxjs';
 import { ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterTestingModule } from '@angular/router/testing';
@@ -33,7 +32,7 @@ describe('TopNavComponent', () => {
     dataService = TestBed.inject(DataService);
 
     spyOn(authService, 'getLoggedUser').and.returnValue(new User());
-    const response = { value: 'en', lang: 'English' };
+    //const response = { value: 'en', lang: 'English' };
     //spyOn(dataService, 'currentLanguage').and.returnValue(of(response));
 
     fixture.detectChanges();

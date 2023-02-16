@@ -55,7 +55,7 @@ export class AddEditTodoModalComponent implements OnInit {
 
     this.todoService.create(todo)
       .subscribe({
-        next: (res) => {
+        next: () => {
           this.dialogRef.close(true);
         },
         error: (error) => this.error = error.error
@@ -72,7 +72,7 @@ export class AddEditTodoModalComponent implements OnInit {
 
     this.todoService.update(this.todo.id, todo)
       .subscribe({
-        next: (res) => {
+        next: () => {
           this.dialogRef.close(true);
         },
         error: (error) => this.error = error.error

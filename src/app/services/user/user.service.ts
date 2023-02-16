@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { Login } from 'src/app/models/login.model';
 import { ResponseModel } from 'src/app/models/reponse.model';
 import { User } from 'src/app/models/user.model';
 import { ApiService } from '../shared/api.service';
@@ -13,11 +14,11 @@ export class UserService {
     private api: ApiService,
   ) { }
 
-  public login(data: any): Observable<ResponseModel> {
+  public login(data: Login): Observable<ResponseModel> {
     return this.api.post(`login`, data);
   }
 
-  public register(data: any): Observable<ResponseModel> {
+  public register(data: User): Observable<ResponseModel> {
     return this.api.post(`register`, data);
   }
 

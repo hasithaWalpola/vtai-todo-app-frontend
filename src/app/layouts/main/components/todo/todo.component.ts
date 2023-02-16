@@ -66,7 +66,7 @@ export class TodoComponent implements OnInit {
   }
 
   // add/edit todo modal open 
-  addEditTodo(todo: any) {
+  addEditTodo(todo: Todo) {
     const dialogRef = this.dialog.open(AddEditTodoModalComponent, {
       data: todo,
     });
@@ -96,7 +96,7 @@ export class TodoComponent implements OnInit {
   }
 
   // delete todo modal open 
-  translateTodoList(language: any) {
+  translateTodoList(language: Language) {
 
     const todoList: string[] = [] //temp array for store todo items name
     this.todoList.forEach((element: Todo) => {

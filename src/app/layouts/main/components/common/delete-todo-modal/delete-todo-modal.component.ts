@@ -24,7 +24,7 @@ export class DeleteTodoModalComponent {
 
     this.todoService.delete(this.todo.id)
       .subscribe({
-        next: (res) => {
+        next: () => {
           this.dialogRef.close(true);
         },
         error: (error) => this.error = error.error
