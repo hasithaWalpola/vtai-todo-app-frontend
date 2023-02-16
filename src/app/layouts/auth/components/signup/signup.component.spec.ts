@@ -6,6 +6,7 @@ import { UserService } from 'src/app/services/user/user.service';
 import { of } from 'rxjs';
 import { MaterialModule } from 'src/app/material.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ResponseModel } from 'src/app/models/reponse.model';
 
 describe('SignupComponent', () => {
   let component: SignupComponent;
@@ -44,7 +45,11 @@ describe('SignupComponent', () => {
   });
 
   it('should call user service register method when form is valid', () => {
-    const response = { success: true };
+    const response: ResponseModel = {
+      success: true,
+      message: '',
+      data: undefined
+    };
     userService.register.and.returnValue(of(response));
     component.form.setValue({
       first_name: 'John',
@@ -65,8 +70,12 @@ describe('SignupComponent', () => {
   });
 
   it('should set error message when user service register method fails', () => {
-    const errorResponse = { error: 'Registration failed' };
-    userService.register.and.returnValue(of(null, errorResponse));
+    const errorResponse: ResponseModel = {
+      success: true,
+      message: '',
+      data: undefined
+    };
+    userService.register.and.returnValue(of(errorResponse));
     component.form.setValue({
       first_name: 'John',
       last_name: 'Doe',
@@ -79,7 +88,11 @@ describe('SignupComponent', () => {
   });
 
   it('should navigate to login page after successful registration', () => {
-    const response = { success: true };
+    const response: ResponseModel = {
+      success: true,
+      message: '',
+      data: undefined
+    };
     userService.register.and.returnValue(of(response));
     spyOn(component.router, 'navigate');
     component.form.setValue({

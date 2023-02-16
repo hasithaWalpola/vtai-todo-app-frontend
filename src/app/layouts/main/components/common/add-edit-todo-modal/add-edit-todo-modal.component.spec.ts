@@ -6,6 +6,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterTestingModule } from '@angular/router/testing';
 import { of } from 'rxjs';
 import { MaterialModule } from 'src/app/material.module';
+import { ResponseModel } from 'src/app/models/reponse.model';
 import { Todo } from 'src/app/models/todo.model';
 import { AuthService } from 'src/app/services/shared/auth.service';
 import { TodoService } from 'src/app/services/todo/todo.service';
@@ -64,7 +65,11 @@ describe('AddEditTodoModalComponent', () => {
     todo.description = 'Test description';
     todo.user_id = 1;
     component.form.patchValue(todo);
-    const response = { success: true };
+    const response: ResponseModel = {
+      success: true,
+      message: '',
+      data: undefined
+    };
     authService.getLoggedUser.and.returnValue({
       id: 1,
       first_name: '',
@@ -89,7 +94,11 @@ describe('AddEditTodoModalComponent', () => {
     component.todo = todo;
     component.form.patchValue(todo);
 
-    const response = { success: true };
+    const response: ResponseModel = {
+      success: true,
+      message: '',
+      data: undefined
+    };
     authService.getLoggedUser.and.returnValue({
       id: 1,
       first_name: '',

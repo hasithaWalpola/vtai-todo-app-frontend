@@ -40,7 +40,7 @@ export class LoginComponent {
         .subscribe({
           next: (res) => {
 
-            const userToken: UserToken = { token: res.token };
+            const userToken: UserToken = { token: res.data.token };
 
             //Store user token in storage
             if (userToken) {

@@ -6,6 +6,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
 import { of } from 'rxjs';
 import { MaterialModule } from 'src/app/material.module';
+import { ResponseModel } from 'src/app/models/reponse.model';
 import { DataService } from 'src/app/services/data/data.service';
 import { TranslationService } from 'src/app/services/translation/translation.service';
 import { UserHistoryComponent } from './user-history.component';
@@ -29,22 +30,14 @@ describe('UserHistoryComponent', () => {
     };
 
     mockDataService = jasmine.createSpyObj(['setSelectedUser']);
+    const response: ResponseModel = {
+      success: true,
+      message: '',
+      data: undefined
+    };
 
     translationService = jasmine.createSpyObj(['getTranslationsByUser']);
-    translationService.getTranslationsByUser.and.returnValue(of({
-      data: [
-        {
-          id: 1,
-          source_text: 'hello',
-          target_text: 'hola'
-        },
-        {
-          id: 2,
-          source_text: 'goodbye',
-          target_text: 'adios'
-        }
-      ]
-    }));
+    translationService.getTranslationsByUser.and.returnValue(of(response));
 
     mockRouter = jasmine.createSpyObj(['navigate']);
 

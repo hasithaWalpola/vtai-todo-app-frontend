@@ -10,6 +10,7 @@ import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { MaterialModule } from 'src/app/material.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { JwtHelperService, JWT_OPTIONS } from '@auth0/angular-jwt';
+import { ResponseModel } from 'src/app/models/reponse.model';
 
 describe('LoginComponent', () => {
   let component: LoginComponent;
@@ -39,7 +40,12 @@ describe('LoginComponent', () => {
 
   it('should submit form when valid', fakeAsync(() => {
     // mock user service login method
-    spyOn(userService, 'login').and.returnValue(of({ token: 'token' }));
+    const response: ResponseModel = {
+      success: true,
+      message: '',
+      data: undefined
+    };
+    spyOn(userService, 'login').and.returnValue(of(response));
 
     // mock user service getLoggedUser method
     // mock router navigate method

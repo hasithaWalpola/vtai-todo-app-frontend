@@ -12,6 +12,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from 'src/app/material.module';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { JwtHelperService, JWT_OPTIONS } from '@auth0/angular-jwt';
+import { ResponseModel } from 'src/app/models/reponse.model';
 
 describe('UserComponent', () => {
   let component: UserComponent;
@@ -49,7 +50,17 @@ describe('UserComponent', () => {
   // });
 
 
-
+  const response: ResponseModel = {
+    success: true,
+    message: '',
+    data: [{
+      id: 1,
+      role: 1,
+      first_name: 'John',
+      last_name: 'Doe',
+      email: 'john.doe@example.com'
+    }]
+  };
 
 
   it('should set userList on successful response', () => {
@@ -62,7 +73,7 @@ describe('UserComponent', () => {
         email: 'john.doe@example.com'
       }
     ];
-    spyOn(userService, 'getAllUsers').and.returnValue(of({ data: users }));
+    spyOn(userService, 'getAllUsers').and.returnValue(of(response));
 
     component.getUsers();
 

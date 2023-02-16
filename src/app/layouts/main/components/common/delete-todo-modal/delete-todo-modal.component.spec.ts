@@ -5,6 +5,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterTestingModule } from '@angular/router/testing';
 import { Observable, of } from 'rxjs';
 import { MaterialModule } from 'src/app/material.module';
+import { ResponseModel } from 'src/app/models/reponse.model';
 import { Todo } from 'src/app/models/todo.model';
 import { TodoService } from 'src/app/services/todo/todo.service';
 import { DeleteTodoModalComponent } from './delete-todo-modal.component';
@@ -48,7 +49,12 @@ describe('DeleteTodoModalComponent', () => {
 
 
   it('should deleteTodo and close the dialog on success', () => {
-    todoService.delete.and.returnValue(of({}));
+    const response: ResponseModel = {
+      success: true,
+      message: '',
+      data: undefined
+    };
+    todoService.delete.and.returnValue(of(response));
 
     component.todo = new Todo();
     component.todo.id = 1;
