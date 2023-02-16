@@ -53,11 +53,13 @@ export class AddEditTodoModalComponent implements OnInit {
     todo.description = this.form.value.description;
     todo.user_id = this.authService.getLoggedUser().id;
 
-    this.todoService.create(todo).then((res) => {
-      this.dialogRef.close(true);
-    }).catch((error) => {
-      this.error = error.error
-    });
+    this.todoService.create(todo)
+      .subscribe({
+        next: () => {
+          this.dialogRef.close(true);
+        },
+        error: (error) => this.error = error.error
+      });
 
   }
 
@@ -69,10 +71,11 @@ export class AddEditTodoModalComponent implements OnInit {
     todo.user_id = this.authService.getLoggedUser().id;
 
     this.todoService.update(this.todo.id, todo)
-      .then((res) => {
-        this.dialogRef.close(true);
-      }).catch((error) => {
-        this.error = error.error
+      .subscribe({
+        next: () => {
+          this.dialogRef.close(true);
+        },
+        error: (error) => this.error = error.error
       });
 
   }

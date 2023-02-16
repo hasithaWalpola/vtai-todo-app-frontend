@@ -23,10 +23,11 @@ export class DeleteTodoModalComponent {
   deleteTodo() {
 
     this.todoService.delete(this.todo.id)
-      .then((res) => {
-        this.dialogRef.close(true);
-      }).catch((error) => {
-        this.error = error.error
+      .subscribe({
+        next: () => {
+          this.dialogRef.close(true);
+        },
+        error: (error) => this.error = error.error
       });
 
   }

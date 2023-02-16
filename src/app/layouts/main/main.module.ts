@@ -9,10 +9,14 @@ import { MaterialModule } from 'src/app/material.module';
 import { TodoItemComponent } from './components/common/todo-item/todo-item.component';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { UserHistoryComponent } from './components/user-history/user-history.component';
+import { MainComponent } from './main.component';
+import { TopNavComponent } from './components/shared/top-nav/top-nav.component';
 
 
 @NgModule({
   declarations: [
+    MainComponent,
+    TopNavComponent,
     TodoComponent,
     UserComponent,
     TodoItemComponent,

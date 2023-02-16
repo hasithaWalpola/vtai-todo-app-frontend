@@ -1,6 +1,6 @@
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 
 import { environment } from 'src/environments/environment';
@@ -18,7 +18,7 @@ export class ApiService {
   get headers() {
 
     //Authenticated header
-    if (this.authService.getUserToken()) {
+    if (this.authService.getUserToken().token) {
       const token = this.authService.getUserToken();
       return new HttpHeaders({
         'Content-Type': 'application/json',
@@ -39,23 +39,23 @@ export class ApiService {
 
   //Handle API related erros
   private handleError(error: HttpErrorResponse) {
-    console.log(error)
+    console.log(error.error.error)
     if (error.error instanceof ProgressEvent) {
-    } else if (error.error.message) {
-      if (error.error.message == 'Unauthenticated.') {
+      console.log(error)
+    } else if (error.error.error) {
+      if (error.error.error == 'unauthorized') {
         this.authService.removerUserData();
         window.location.href = '/login'
       }
-      return (
+      return throwError(() =>
         error.error.message
       );
     } else {
-      return (
+      return throwError(() =>
         error.error
       );
     }
-    //handler.showErrorMessage('Could not connect to remote server.')
-    return (
+    return throwError(() =>
       'Could not connect to remote server.'
     );
   }
@@ -67,32 +67,32 @@ export class ApiService {
   }
 
 
-  get(path: string): Observable<any> {
+  get<T>(path: string): Observable<T> {
     return this.http
-      .get<any>(this.getBaseUrl() + `${path}`, { headers: this.headers })
+      .get<T>(this.getBaseUrl() + `${path}`, { headers: this.headers })
       .pipe(catchError(err => this.handleError(err)))
   }
 
-  post(path: string, body: Object = {}): Observable<any> {
+  post<T>(path: string, body: object): Observable<T> {
     return this.http
-      .post<any>(this.getBaseUrl() + `${path}`, JSON.stringify(body), { headers: this.headers }
+      .post<T>(this.getBaseUrl() + `${path}`, JSON.stringify(body), { headers: this.headers }
       )
       .pipe(
         catchError(err => this.handleError(err))
       );
   }
 
-  put(path: string, body: Object = {}): Observable<any> {
+  put<T>(path: string, body: object): Observable<T> {
     return this.http
-      .put<any>(this.getBaseUrl() + `${path}`, JSON.stringify(body), { headers: this.headers })
+      .put<T>(this.getBaseUrl() + `${path}`, JSON.stringify(body), { headers: this.headers })
       .pipe(
         catchError(err => this.handleError(err))
       )
   }
 
-  delete(path: string): Observable<any> {
+  delete<T>(path: string): Observable<T> {
     return this.http
-      .delete<any>(this.getBaseUrl() + `${path}`, { headers: this.headers })
+      .delete<T>(this.getBaseUrl() + `${path}`, { headers: this.headers })
       .pipe(
         catchError(err => this.handleError(err))
       );

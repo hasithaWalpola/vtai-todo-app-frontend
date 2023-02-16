@@ -21,7 +21,7 @@ import { DeleteTodoModalComponent } from '../common/delete-todo-modal/delete-tod
 })
 export class TodoComponent implements OnInit {
 
-  todos$ = this.store.pipe(select(selectTodoList))
+  todos$ = this.store?.pipe(select(selectTodoList))
   loggedUser!: User
   todoList: Todo[] = []
   currentLanguage = '';
@@ -43,7 +43,7 @@ export class TodoComponent implements OnInit {
     }
 
     //  subscribe to the todo store change 
-    this.store.subscribe((res) => {
+    this.store?.subscribe((res) => {
       if (res.todos.todos) {
         this.todoList = res.todos.todos
       }
@@ -61,12 +61,12 @@ export class TodoComponent implements OnInit {
   // load todo list
   getTodoList() {
 
-    this.store.dispatch(new GetTodos(this.loggedUser.id));
+    this.store?.dispatch(new GetTodos(this.loggedUser?.id));
 
   }
 
   // add/edit todo modal open 
-  addEditTodo(todo: any) {
+  addEditTodo(todo: Todo) {
     const dialogRef = this.dialog.open(AddEditTodoModalComponent, {
       data: todo,
     });
@@ -114,29 +114,28 @@ export class TodoComponent implements OnInit {
       }
 
       this.translationService.translate(obj)
-        .then((res: any) => {
+        .subscribe({
+          next: (res) => {
+            const translatedTodoList: Todo[] = []
+            this.todoList.forEach((todo: Todo, index: number) => {
+              const obj: Todo = { ...todo }
 
-          const translatedTodoList: Todo[] = []
-          this.todoList.forEach((todo: Todo, index: number) => {
-            const obj: Todo = { ...todo }
+              //update transdlation object in todo item
+              if ((typeof obj.translation === "object" || typeof obj.translation === 'function') && (obj.translation !== null)) {
+                obj.translation = { ...obj.translation }
+                obj.translation[language?.value] = res.data.translations[index].translatedText;
+              }
+              translatedTodoList.push(obj);
 
-            //update transdlation object in todo item
-            if ((typeof obj.translation === "object" || typeof obj.translation === 'function') && (obj.translation !== null)) {
-              obj.translation = { ...obj.translation }
-              obj.translation[language?.value] = res.data.translations[index].translatedText;
-            }
-            translatedTodoList.push(obj);
+            });
 
-          });
+            //call translation action history save function
+            this.saveTranslationAction(language)
 
-          //call translation action history save function
-          this.saveTranslationAction(language)
-
-          //update the todo store
-          this.store.dispatch(new UpdateTodosSuccess(translatedTodoList));
-
-        }).catch((error) => {
-
+            //update the todo store
+            this.store.dispatch(new UpdateTodosSuccess(translatedTodoList));
+          },
+          error: (e) => console.error(e)
         });
 
     }
@@ -152,10 +151,11 @@ export class TodoComponent implements OnInit {
     translationHistory.user_id = this.authService.getLoggedUser().id
 
     this.translationService.saveAction(translationHistory)
-      .then((res) => {
-
-      }).catch((error) => {
-
+      .subscribe({
+        next: (res) => {
+          console.log(res)
+        },
+        error: (e) => console.error(e)
       });
 
   }

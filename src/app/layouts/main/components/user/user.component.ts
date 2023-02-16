@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { User } from 'src/app/models/user.model';
 import { DataService } from 'src/app/services/data/data.service';
-import { AuthService } from 'src/app/services/shared/auth.service';
 import { UserService } from 'src/app/services/user/user.service';
 
 @Component({
@@ -12,13 +11,11 @@ import { UserService } from 'src/app/services/user/user.service';
 })
 export class UserComponent implements OnInit {
 
-  loggedUser!: User;
   userList: User[] = []
   displayedColumns: string[] = ['first_name', 'last_name', 'email', 'actions'];
 
   constructor(
-    private router: Router,
-    private authService: AuthService,
+    public router: Router,
     private userService: UserService,
     private dataService: DataService
 
@@ -26,19 +23,18 @@ export class UserComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this.loggedUser = this.authService.getLoggedUser()
+    this.getUsers();
 
-    if (this.loggedUser) {
-      this.getUsers();
-    }
   }
 
   getUsers() {
-    this.userService.getAllUsers().then((res) => {
-      this.userList = res.data;
-    }).catch((error) => {
-
-    });
+    this.userService.getAllUsers()
+      .subscribe({
+        next: (res) => {
+          this.userList = res.data;
+        },
+        error: (e) => console.error(e)
+      });
 
   }
 

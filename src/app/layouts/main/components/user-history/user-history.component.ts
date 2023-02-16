@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TranslationHistory } from 'src/app/models/history.model';
-import { DataService } from 'src/app/services/data/data.service';
 import { TranslationService } from 'src/app/services/translation/translation.service';
 
 @Component({
@@ -16,14 +15,13 @@ export class UserHistoryComponent implements OnInit {
 
   constructor(
     private router: ActivatedRoute,
-    private dataService: DataService,
     private translationService: TranslationService,
-    private route: Router,
+    public route: Router,
   ) { }
 
   ngOnInit() {
 
-    const params: any = this.router.snapshot.params
+    const params: object = this.router.snapshot.params
     console.log(params, 'params');
     this.selectedUser = params;
     if (this.selectedUser) {
@@ -35,13 +33,13 @@ export class UserHistoryComponent implements OnInit {
 
 
   getHistory() {
-    this.translationService.getTranslationsByUser(this.selectedUser.user).then((res) => {
-
-      this.userHistory = res.data;
-
-    }).catch((error) => {
-      console.log(error, 'Error');
-    });
+    this.translationService.getTranslationsByUser(this.selectedUser.id)
+      .subscribe({
+        next: (res) => {
+          this.userHistory = res.data;
+        },
+        error: (e) => console.error(e)
+      });
 
   }
 

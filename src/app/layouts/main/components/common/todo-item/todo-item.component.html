@@ -1,5 +1,5 @@
 <mat-card>
-    <mat-card-header> {{ todo?.translation[language] }}</mat-card-header>
+    <mat-card-header> {{ todo?.translation?.[language] }}</mat-card-header>
     <mat-card-actions class="actions">
         <button class="button" mat-mini-fab color="primary" (click)="onEdit()">
             <mat-icon>edit</mat-icon>

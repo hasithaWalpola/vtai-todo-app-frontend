@@ -15,7 +15,7 @@ export class LoginComponent {
   error = "";
 
   constructor(
-    private router: Router,
+    public router: Router,
     private authService: AuthService,
     private userService: UserService,
 
@@ -36,35 +36,30 @@ export class LoginComponent {
         .login({
           email: this.form.value.email,
           password: this.form.value.password,
-        }).then((res) => {
+        })
+        .subscribe({
+          next: (res) => {
 
-          const userToken: UserToken = { token: res.token };
+            const userToken: UserToken = { token: res.data?.token };
 
-          //Store user token in storage
-          if (userToken) {
-            this.authService.storeUserToken(userToken);
+            //Store user token in storage
+            if (userToken) {
+              this.authService.storeUserToken(userToken);
 
-            //Get logged in user data
-            this.userService.getLoggedUser().then((res) => {
-              this.authService.storeLoggedUser(res.data);
+              //Get logged in user data
+              this.authService.getLoggedUser()
 
               //Check user role and navigate acordingly
-              if (res.data.role == 1) {
+              if (this.authService.getLoggedUser()?.role == 1) {
                 this.router.navigate(['/users']);
               } else {
                 this.router.navigate(['/home']);
               }
 
-            })
-          }
-
-
-        }).catch((error) => {
-          console.log(error, 'error');
-
-          this.error = error.error
+            }
+          },
+          error: (error) => this.error = error.error
         });
-
 
     }
   }

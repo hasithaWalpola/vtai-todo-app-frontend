@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
+import { User } from 'src/app/models/user.model';
 import { UserService } from 'src/app/services/user/user.service';
 
 @Component({
@@ -11,10 +12,10 @@ import { UserService } from 'src/app/services/user/user.service';
 export class SignupComponent {
 
   error = "";
-  passwordMatch = true;
+  passwordMatch = false;
 
   constructor(
-    private router: Router,
+    public router: Router,
     private userService: UserService,
     private route: ActivatedRoute,
 
@@ -41,21 +42,22 @@ export class SignupComponent {
 
       //Check if both password and confirm password match
       if (this.form.value.password == this.form.value.conirm_password) {
+        this.passwordMatch = true;
+        const user = new User();
+        user.first_name = this.form.value.first_name,
+          user.last_name = this.form.value.last_name,
+          user.email = this.form.value.email,
+          user.password = this.form.value.password,
+          user.role = this.route.snapshot.routeConfig?.path == 'signup/admin' ? 1 : 2
         this.userService
-          .register({
-            first_name: this.form.value.first_name,
-            last_name: this.form.value.last_name,
-            email: this.form.value.email,
-            password: this.form.value.password,
-            role: this.route.snapshot.routeConfig?.path == 'signup/admin' ? 1 : 2
-
-          })
-          .then((res) => {
-            this.router.navigate(['/login']);
-          })
-          .catch((error) => {
-            this.error = error.error
+          .register(user)
+          .subscribe({
+            next: () => {
+              this.router.navigate(['/login']);
+            },
+            error: (error) => this.error = error.error
           });
+
       } else {
         this.passwordMatch = false;
       }

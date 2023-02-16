@@ -1,4 +1,6 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Language } from 'src/app/models/language.model';
+import { Todo } from 'src/app/models/todo.model';
 
 @Component({
   selector: 'app-todo-item',
@@ -7,8 +9,8 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 })
 export class TodoItemComponent {
 
-  @Input() todo: any;
-  @Input() language: any;
+  @Input() todo!: Todo;
+  @Input() language!: Language;
   @Output() editTask = new EventEmitter();
   @Output() deleteTask = new EventEmitter();
   title = ''
