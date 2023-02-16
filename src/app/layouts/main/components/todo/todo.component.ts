@@ -61,7 +61,7 @@ export class TodoComponent implements OnInit {
   // load todo list
   getTodoList() {
 
-    this.store?.dispatch(new GetTodos(this.loggedUser.id));
+    this.store?.dispatch(new GetTodos(this.loggedUser?.id));
 
   }
 
