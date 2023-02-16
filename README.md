@@ -27,7 +27,6 @@ This README outlines the steps to setup the project, provides a brief descriptio
       - [Normal User](#normal-user-1)
       - [Admin User](#admin-user-1)
   - [Important Decisions](#important-decisions)
-    - [Architectural Decisions](#architectural-decisions)
     - [Implementation Decisions](#implementation-decisions)
   - [Checklist](#checklist)
     - [✅ Unit Tests](#-unit-tests)
@@ -132,26 +131,13 @@ Implementation of the normal user flow:
 
 ## Important Decisions
 
-The following implementation, and architectural decisions were taken throughout the development process:
-
-### Architectural Decisions
-
-
-  Following is the basic structure of the repo.
-
-  - `apps`
-    - `src`
-  - `packages`
-    - `eslint-plugin`
-  - `store`
-    - `ngrx` (Used for translation button)
-
-- Typescript was the primary language used for development.
-- Google Translation API used for translations
+The following implementation decisions were taken throughout the development process:
 
 ### Implementation Decisions
 
 - Angular was used for the implementation of the frontend with Angular Material.
+- Typescript was the primary language used for development.
+- Google Translation API used for translations
 
 
 ## Checklist
