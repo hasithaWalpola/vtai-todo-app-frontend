@@ -1,5 +1,7 @@
 # VTAI Todo App Frontend
 
+[Deployed Application](https://vtai-todo.uc.r.appspot.com)
+
 This README outlines the steps to setup the project, provides a brief description of the application and its design, highlights the important design and implementation decisions taken.
 
 ## Content
@@ -38,7 +40,7 @@ Install dependencies by running the following command in the root of the project
 
 ```bash
 # From root of the project.
-npm install
+yarn install or npm install
 ```
 ### Run
 
@@ -166,6 +168,8 @@ This section provides a summary of my adherence to the requirements listed.
   <img src="./docs/resources/test.PNG" width="600" />
 
 ### ✅ Deployemnt
+
+[Deployement Document]("docs/resources/VTAI%20-%20Todo%20App%20Deployment.pdf")
 
 - Application deployed to the Google Cloud using Github Cloud Builder
 - Application deployed automatically when push to main branch(CI/CD)
