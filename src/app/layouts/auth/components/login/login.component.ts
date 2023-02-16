@@ -40,7 +40,7 @@ export class LoginComponent {
         .subscribe({
           next: (res) => {
 
-            const userToken: UserToken = { token: res.data.token };
+            const userToken: UserToken = { token: res.data?.token };
 
             //Store user token in storage
             if (userToken) {
@@ -50,7 +50,7 @@ export class LoginComponent {
               this.authService.getLoggedUser()
 
               //Check user role and navigate acordingly
-              if (this.authService.getLoggedUser().role == 1) {
+              if (this.authService.getLoggedUser()?.role == 1) {
                 this.router.navigate(['/users']);
               } else {
                 this.router.navigate(['/home']);
