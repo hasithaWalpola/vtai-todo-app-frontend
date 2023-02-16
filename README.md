@@ -12,7 +12,6 @@ This README outlines the steps to setup the project, provides a brief descriptio
     - [Install](#install)
     - [Run](#run)
     - [Run the unit tests](#run-the-unit-tests)
-  - [Code scaffolding](#code-scaffolding)
   - [Build](#build)
   - [The Application](#the-application)
     - [Design](#design)
@@ -60,11 +59,6 @@ To run the unit test suite, execute the following command:
 # From root of the project.
 ng test
 ```
-
-## Code scaffolding
-
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
-
 ## Build
 
 Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
@@ -142,13 +136,14 @@ The following implementation, and architectural decisions were taken throughout 
   Following is the basic structure of the repo.
 
   - `apps`
-    - `dashboard` (Front end built with React)
+    - `src`
   - `packages`
     - `eslint-plugin`
   - `store`
     - `ngrx` (Used for translation button)
 
 - Typescript was the primary language used for development.
+- Google Translation API used for translations
 
 ### Implementation Decisions
 
@@ -169,7 +164,7 @@ This section provides a summary of my adherence to the requirements listed.
 
 ### ✅ Deployemnt
 
-[Deployement Document]("docs/resources/VTAI%20-%20Todo%20App%20Deployment.pdf")
+[Deployement Document](https://github.com/hasithaWalpola/vtai-todo-app-frontend/blob/main/docs/resources/VTAI_Todo_App.pdf)
 
 - Application deployed to the Google Cloud using Github Cloud Builder
 - Application deployed automatically when push to main branch(CI/CD)
