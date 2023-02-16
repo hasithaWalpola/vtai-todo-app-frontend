@@ -1,4 +1,5 @@
 import { TestBed } from '@angular/core/testing';
+import { JwtHelperService, JWT_OPTIONS } from '@auth0/angular-jwt';
 import { of } from 'rxjs';
 import { Todo } from 'src/app/models/todo.model';
 import { ApiService } from '../shared/api.service';
@@ -11,7 +12,7 @@ describe('TodoService', () => {
   beforeEach(() => {
     const spy = jasmine.createSpyObj('ApiService', ['post', 'put', 'delete', 'get']);
     TestBed.configureTestingModule({
-      providers: [TodoService, { provide: ApiService, useValue: spy }]
+      providers: [TodoService, { provide: ApiService, useValue: spy }, JwtHelperService, { provide: JWT_OPTIONS, useValue: JWT_OPTIONS }]
     });
     todoService = TestBed.inject(TodoService);
     apiServiceSpy = TestBed.inject(ApiService) as jasmine.SpyObj<ApiService>;

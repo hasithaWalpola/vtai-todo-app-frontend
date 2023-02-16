@@ -3,6 +3,7 @@ import { HttpClientTestingModule, HttpTestingController } from '@angular/common/
 
 import { ApiService } from './api.service';
 import { AuthService } from './auth.service';
+import { JwtHelperService, JWT_OPTIONS } from '@auth0/angular-jwt';
 
 describe('ApiService', () => {
   let service: ApiService;
@@ -11,7 +12,7 @@ describe('ApiService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [HttpClientTestingModule],
-      providers: [ApiService, AuthService]
+      providers: [ApiService, AuthService, JwtHelperService, { provide: JWT_OPTIONS, useValue: JWT_OPTIONS }]
     });
     service = TestBed.inject(ApiService);
     httpMock = TestBed.inject(HttpTestingController);

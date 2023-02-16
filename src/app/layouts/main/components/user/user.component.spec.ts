@@ -11,6 +11,7 @@ import { ApiService } from 'src/app/services/shared/api.service';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from 'src/app/material.module';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { JwtHelperService, JWT_OPTIONS } from '@auth0/angular-jwt';
 
 describe('UserComponent', () => {
   let component: UserComponent;
@@ -23,7 +24,7 @@ describe('UserComponent', () => {
     await TestBed.configureTestingModule({
       declarations: [UserComponent],
       imports: [RouterTestingModule, ReactiveFormsModule, RouterTestingModule, MaterialModule, BrowserAnimationsModule, HttpClientTestingModule],
-      providers: [ApiService]
+      providers: [ApiService, JwtHelperService, { provide: JWT_OPTIONS, useValue: JWT_OPTIONS }]
     }).compileComponents();
   });
 

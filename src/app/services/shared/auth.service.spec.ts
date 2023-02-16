@@ -2,13 +2,14 @@ import { TestBed } from '@angular/core/testing';
 import { AuthService } from './auth.service';
 import { UserToken } from 'src/app/models/token.model';
 import { User } from 'src/app/models/user.model';
+import { JwtHelperService, JWT_OPTIONS } from '@auth0/angular-jwt';
 
 describe('AuthService', () => {
   let service: AuthService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [AuthService],
+      providers: [AuthService, JwtHelperService, { provide: JWT_OPTIONS, useValue: JWT_OPTIONS }],
     });
 
     service = TestBed.inject(AuthService);

@@ -3,6 +3,7 @@ import { Component, DebugElement } from '@angular/core';
 import { By } from '@angular/platform-browser';
 import { ShowHideDirective } from './show-hide.directive';
 import { AuthService } from '../services/shared/auth.service';
+import { JwtHelperService, JWT_OPTIONS } from '@auth0/angular-jwt';
 
 @Component({
   template: `
@@ -18,7 +19,7 @@ describe('ShowHideDirective', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [ShowHideDirective, TestComponent],
-      providers: [AuthService],
+      providers: [AuthService, JwtHelperService, { provide: JWT_OPTIONS, useValue: JWT_OPTIONS }],
     });
 
     fixture = TestBed.createComponent(TestComponent);

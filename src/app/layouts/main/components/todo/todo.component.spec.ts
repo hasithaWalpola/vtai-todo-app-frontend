@@ -3,6 +3,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterTestingModule } from '@angular/router/testing';
+import { JwtHelperService, JWT_OPTIONS } from '@auth0/angular-jwt';
 import { Store } from '@ngrx/store';
 import { MaterialModule } from 'src/app/material.module';
 import { ApiService } from 'src/app/services/shared/api.service';
@@ -19,7 +20,7 @@ describe('TodoComponent', () => {
     await TestBed.configureTestingModule({
       declarations: [TodoComponent],
       imports: [RouterTestingModule, ReactiveFormsModule, RouterTestingModule, MaterialModule, BrowserAnimationsModule, HttpClientTestingModule],
-      providers: [ApiService, { provide: Store, useValue: storeMock },]
+      providers: [ApiService, { provide: Store, useValue: storeMock }, JwtHelperService, { provide: JWT_OPTIONS, useValue: JWT_OPTIONS }]
     })
       .compileComponents();
 

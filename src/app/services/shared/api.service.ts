@@ -67,32 +67,32 @@ export class ApiService {
   }
 
 
-  get(path: string): Observable<any> {
+  get<T>(path: string): Observable<T> {
     return this.http
-      .get<any>(this.getBaseUrl() + `${path}`, { headers: this.headers })
+      .get<T>(this.getBaseUrl() + `${path}`, { headers: this.headers })
       .pipe(catchError(err => this.handleError(err)))
   }
 
-  post(path: string, body: object): Observable<any> {
+  post<T>(path: string, body: object): Observable<T> {
     return this.http
-      .post<any>(this.getBaseUrl() + `${path}`, JSON.stringify(body), { headers: this.headers }
+      .post<T>(this.getBaseUrl() + `${path}`, JSON.stringify(body), { headers: this.headers }
       )
       .pipe(
         catchError(err => this.handleError(err))
       );
   }
 
-  put(path: string, body: object): Observable<any> {
+  put<T>(path: string, body: object): Observable<T> {
     return this.http
-      .put<any>(this.getBaseUrl() + `${path}`, JSON.stringify(body), { headers: this.headers })
+      .put<T>(this.getBaseUrl() + `${path}`, JSON.stringify(body), { headers: this.headers })
       .pipe(
         catchError(err => this.handleError(err))
       )
   }
 
-  delete(path: string): Observable<any> {
+  delete<T>(path: string): Observable<T> {
     return this.http
-      .delete<any>(this.getBaseUrl() + `${path}`, { headers: this.headers })
+      .delete<T>(this.getBaseUrl() + `${path}`, { headers: this.headers })
       .pipe(
         catchError(err => this.handleError(err))
       );

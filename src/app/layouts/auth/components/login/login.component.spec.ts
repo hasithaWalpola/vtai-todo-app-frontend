@@ -9,6 +9,7 @@ import { ApiService } from 'src/app/services/shared/api.service';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { MaterialModule } from 'src/app/material.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { JwtHelperService, JWT_OPTIONS } from '@auth0/angular-jwt';
 
 describe('LoginComponent', () => {
   let component: LoginComponent;
@@ -20,7 +21,7 @@ describe('LoginComponent', () => {
     await TestBed.configureTestingModule({
       declarations: [LoginComponent],
       imports: [HttpClientTestingModule, ReactiveFormsModule, RouterTestingModule, MaterialModule, BrowserAnimationsModule],
-      providers: [ApiService]
+      providers: [ApiService, JwtHelperService, { provide: JWT_OPTIONS, useValue: JWT_OPTIONS }]
     }).compileComponents();
   });
 
@@ -41,8 +42,6 @@ describe('LoginComponent', () => {
     spyOn(userService, 'login').and.returnValue(of({ token: 'token' }));
 
     // mock user service getLoggedUser method
-    spyOn(userService, 'getLoggedUser').and.returnValue(of({ data: { role: 1 } }));
-
     // mock router navigate method
     spyOn(component.router, 'navigate');
 
@@ -54,8 +53,7 @@ describe('LoginComponent', () => {
 
     tick();
 
-    //expect(authService.storeUserToken).toHaveBeenCalledWith({ token: 'token' });
-    // expect(authService.storeLoggedUser).toHaveBeenCalled();
+    expect(authService.storeUserToken).toHaveBeenCalledWith({ token: 'token' });
     expect(component.router.navigate).toHaveBeenCalledWith(['/users']);
   }));
 

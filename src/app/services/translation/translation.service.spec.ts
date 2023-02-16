@@ -4,6 +4,7 @@ import { TranslationService } from './translation.service';
 import { ApiService } from '../shared/api.service';
 import { TranslationHistory } from 'src/app/models/history.model';
 import { environment } from 'src/environments/environment';
+import { JwtHelperService, JWT_OPTIONS } from '@auth0/angular-jwt';
 
 describe('TranslationService', () => {
   let service: TranslationService;
@@ -13,7 +14,7 @@ describe('TranslationService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [HttpClientTestingModule],
-      providers: [ApiService, TranslationService],
+      providers: [ApiService, TranslationService, JwtHelperService, { provide: JWT_OPTIONS, useValue: JWT_OPTIONS }],
     });
     service = TestBed.inject(TranslationService);
     httpMock = TestBed.inject(HttpTestingController);
